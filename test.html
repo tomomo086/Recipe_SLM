@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMStudio最小テスト</title>
+</head>
+<body>
+    <h2>LMStudio API 最小テスト</h2>
+    <button onclick="testAPI()">APIテスト実行</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '送信中...';
+
+            try {
+                const response = await fetch('http://localhost:1234/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "model": "llama-3.1-swallow-8b-instruct-v0.5",
+                        "messages": [
+                            {"role": "user", "content": "Hello"}
+                        ],
+                        "max_tokens": 50
+                    })
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', [...response.headers.entries()]);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('Response data:', data);
+                resultDiv.innerHTML = `<strong>成功!</strong><br>応答: ${data.choices[0].message.content}`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `<strong>エラー:</strong> ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
