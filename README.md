@@ -70,7 +70,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
       <td align="center">
         <img src="photo/スマホ画面上側.png" alt="チャット画面上部" width="280"/>
         <br/><strong>🔝 チャット画面上部</strong>
-        <br/>献立相談の入力エリア
+        <br/>接続テストなどの情報
       </td>
       <td align="center">
         <img src="photo/スマホ画面下側.png" alt="チャット画面下部" width="280"/>
