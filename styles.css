@@ -82,6 +82,31 @@ h2 {
     transform: translateY(-1px);
 }
 
+.config select {
+    width: 100%;
+    margin: 8px 0;
+    padding: 15px 20px;
+    border: 2px solid #e1e8ed;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.config select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+    transform: translateY(-1px);
+}
+
+.config select:hover {
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
 .messages { 
     height: 550px; 
     overflow-y: auto; 

@@ -1,3 +1,58 @@
+// モデル一覧を取得する関数
+async function loadModels() {
+    const loadBtn = document.getElementById('loadModelsBtn');
+    const apiUrl = document.getElementById('apiUrl').value;
+    const modelSelect = document.getElementById('modelSelect');
+    
+    loadBtn.disabled = true;
+    loadBtn.textContent = '取得中...';
+    
+    try {
+        // LM Studioのモデル一覧APIを呼び出し
+        const response = await fetch(apiUrl + '/v1/models', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            
+            // 既存のオプションをクリア（最初のオプションは残す）
+            while (modelSelect.children.length > 1) {
+                modelSelect.removeChild(modelSelect.lastChild);
+            }
+            
+            // モデル一覧をドロップダウンに追加
+            if (data.data && data.data.length > 0) {
+                data.data.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.id;
+                    option.textContent = model.id;
+                    modelSelect.appendChild(option);
+                });
+                
+                // 最初のモデルを選択
+                if (modelSelect.children.length > 1) {
+                    modelSelect.selectedIndex = 1;
+                }
+                
+                showStatus('✓ モデル一覧を取得しました');
+            } else {
+                showStatus('⚠ 利用可能なモデルが見つかりません', true);
+            }
+        } else {
+            throw new Error('HTTP ' + response.status);
+        }
+    } catch (error) {
+        showStatus('✗ モデル一覧取得エラー: ' + error.message, true);
+    }
+    
+    loadBtn.disabled = false;
+    loadBtn.textContent = 'モデル一覧取得';
+}
+
 function addMessage(text, isUser) {
     const div = document.createElement('div');
     div.className = 'message ' + (isUser ? 'user' : 'ai');
@@ -16,6 +71,12 @@ function showStatus(message, isError = false) {
 async function testConnection() {
     const testBtn = document.getElementById('testBtn');
     const apiUrl = document.getElementById('apiUrl').value;
+    const selectedModel = document.getElementById('modelSelect').value;
+    
+    if (!selectedModel) {
+        showStatus('⚠ モデルを選択してください', true);
+        return;
+    }
     
     testBtn.disabled = true;
     testBtn.textContent = '接続中...';
@@ -28,7 +89,7 @@ async function testConnection() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: document.getElementById('modelName').value,
+                model: document.getElementById('modelSelect').value,
                 messages: [
                     { role: "user", content: "Hello" }
                 ],
@@ -54,10 +115,15 @@ async function sendMessage() {
     const input = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const apiUrl = document.getElementById('apiUrl').value;
-    const modelName = document.getElementById('modelName').value;
+    const modelName = document.getElementById('modelSelect').value;
     
     const message = input.value.trim();
     if (!message) return;
+    
+    if (!modelName) {
+        showStatus('⚠ モデルを選択してください', true);
+        return;
+    }
 
     addMessage(message, true);
     input.value = '';
@@ -154,3 +220,11 @@ function clearChat() {
 // 初期化
 //addMessage('CORS対応版チャットシステム起動', false);
 //addMessage('まず「接続テスト」で動作確認してください', false);
+
+// ページ読み込み時にモデル一覧を自動取得
+document.addEventListener('DOMContentLoaded', function() {
+    // 少し遅延させてからモデル一覧を取得
+    setTimeout(() => {
+        loadModels();
+    }, 500);
+});

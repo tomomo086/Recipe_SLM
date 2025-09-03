@@ -12,7 +12,10 @@
         
         <div class="config">
             <div>APIサーバー: <input type="text" id="apiUrl" value="http://192.168.2.107:1234"></div>
-            <div>モデル: <input type="text" id="modelName" value="llama-3.1-swallow-8b-instruct-v0.5"></div>
+            <div>モデル: <select id="modelSelect">
+                <option value="">モデルを選択してください</option>
+            </select></div>
+            <button onclick="loadModels()" id="loadModelsBtn">モデル一覧取得</button>
             <button onclick="testConnection()" id="testBtn">接続テスト</button>
         </div>
         
