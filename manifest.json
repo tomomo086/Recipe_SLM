@@ -1,0 +1,20 @@
+{
+  "name": "献立補助AI",
+  "short_name": "献立AI",
+  "description": "AIを使った献立提案システム",
+  "start_url": "/chat.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "food", "utilities"],
+  "lang": "ja"
+}

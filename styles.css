@@ -553,6 +553,72 @@ button:disabled {
 
 
 
+/* PWAインストール促進 */
+.install-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: slideUp 0.3s ease-out;
+}
+
+.install-content {
+    text-align: center;
+}
+
+.install-content p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.install-btn, .dismiss-btn {
+    padding: 12px 24px;
+    margin: 0 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.install-btn {
+    background: white;
+    color: #667eea;
+}
+
+.install-btn:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+.dismiss-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.dismiss-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
     body {

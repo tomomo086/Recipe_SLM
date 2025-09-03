@@ -221,6 +221,66 @@ function clearChat() {
     showStatus('✓ チャット履歴をクリアしました');
 }
 
+// スマホでの使いやすさを向上させる機能
+function optimizeForMobile() {
+    // タッチ操作の最適化
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            // スマホで入力フィールドにフォーカスした時に自動スクロール
+            setTimeout(() => {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+    });
+    
+    // ダブルタップズームを無効化（既にCSSで設定済み）
+    document.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+    
+    // 長押しメニューを無効化
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+    
+    // スワイプでチャット履歴をクリア
+    let startX = 0;
+    let startY = 0;
+    let isSwiping = false;
+    
+    document.addEventListener('touchstart', function(event) {
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+        isSwiping = false;
+    });
+    
+    document.addEventListener('touchmove', function(event) {
+        if (!isSwiping) {
+            const deltaX = Math.abs(event.touches[0].clientX - startX);
+            const deltaY = Math.abs(event.touches[0].clientY - startY);
+            
+            if (deltaX > 50 && deltaY < 30) {
+                isSwiping = true;
+            }
+        }
+    });
+    
+    document.addEventListener('touchend', function(event) {
+        if (isSwiping) {
+            const deltaX = event.changedTouches[0].clientX - startX;
+            if (deltaX > 100) {
+                // 右スワイプでチャット履歴をクリア
+                if (confirm('チャット履歴をクリアしますか？')) {
+                    clearChat();
+                }
+            }
+        }
+    });
+}
+
 // 初期化
 //addMessage('CORS対応版チャットシステム起動', false);
 //addMessage('まず「接続テスト」で動作確認してください', false);
@@ -231,4 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         loadModels();
     }, 500);
+    
+    // スマホ最適化を適用
+    optimizeForMobile();
 });
