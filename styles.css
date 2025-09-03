@@ -365,20 +365,47 @@ button:disabled {
 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
     .container {
         padding: 25px;
         margin: 10px;
+        border-radius: 16px;
     }
     
     h2 {
         font-size: 2em;
+        margin-bottom: 25px;
     }
     
     .config {
         padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .config-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .config-buttons button {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .messages {
+        height: 300px;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 16px;
     }
     
     .message {
+        margin: 15px 0;
+        padding: 15px 20px;
+        border-radius: 16px;
         margin-left: 0;
         margin-right: 0;
     }
@@ -393,8 +420,72 @@ button:disabled {
         gap: 15px;
     }
     
-    button {
+    .input-area input {
         width: 100%;
+    }
+    
+    .input-area button {
+        width: 100%;
+    }
+    
+    .status {
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 12px;
+    }
+}
+
+/* さらに小さい画面用 */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 20px;
+        margin: 5px;
+        border-radius: 12px;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    
+    .config {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .messages {
+        height: 250px;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 12px;
+    }
+    
+    .message {
+        margin: 12px 0;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+    
+    .input-area {
+        gap: 12px;
+    }
+    
+    .input-area input,
+    .input-area button {
+        padding: 15px 20px;
+        font-size: 14px;
+    }
+    
+    .status {
+        padding: 12px 16px;
+        margin: 15px 0;
+        border-radius: 10px;
+        font-size: 14px;
     }
 }
 
@@ -427,4 +518,53 @@ button:disabled {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* タッチデバイス用の最適化 */
+@media (hover: none) and (pointer: coarse) {
+    button {
+        min-height: 44px; /* タッチターゲットの最小サイズ */
+    }
+    
+    input, select {
+        min-height: 44px;
+    }
+    
+    .config-buttons button {
+        min-height: 50px;
+    }
+    
+    .input-area button {
+        min-height: 50px;
+    }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #7f8c8d 100%);
+    }
+    
+    .container {
+        background: rgba(44, 62, 80, 0.95);
+        color: #ecf0f1;
+    }
+    
+    h2 {
+        color: #ecf0f1;
+    }
+    
+    .config {
+        background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+        color: #ecf0f1;
+    }
+    
+    .config-item label {
+        color: #ecf0f1;
+    }
+    
+    .ai {
+        background: #34495e;
+        color: #ecf0f1;
+    }
 }
