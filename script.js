@@ -33,12 +33,14 @@ async function loadModels() {
                     modelSelect.appendChild(option);
                 });
                 
-                // 最初のモデルを選択
+                // 最初のモデルを選択して固定
                 if (modelSelect.children.length > 1) {
                     modelSelect.selectedIndex = 1;
+                    // 選択後、セレクトボックスを無効化
+                    modelSelect.disabled = true;
                 }
                 
-                showStatus('✓ モデル一覧を取得しました');
+                showStatus('✓ モデル一覧を取得しました（モデル選択は固定されています）');
             } else {
                 showStatus('⚠ 利用可能なモデルが見つかりません', true);
             }
@@ -51,6 +53,26 @@ async function loadModels() {
     
     loadBtn.disabled = false;
     loadBtn.textContent = 'モデル一覧取得';
+}
+
+// モデル選択をリセットする関数
+function resetModelSelection() {
+    const modelSelect = document.getElementById('modelSelect');
+    const resetBtn = document.getElementById('resetModelBtn');
+    
+    resetBtn.disabled = true;
+    resetBtn.textContent = 'リセット中...';
+    
+    // セレクトボックスを有効化
+    modelSelect.disabled = false;
+    
+    // 選択をクリア
+    modelSelect.selectedIndex = 0;
+    
+    showStatus('✓ モデル選択をリセットしました。新しいモデルを選択してください。');
+    
+    resetBtn.disabled = false;
+    resetBtn.textContent = 'モデル再選択';
 }
 
 function addMessage(text, isUser) {

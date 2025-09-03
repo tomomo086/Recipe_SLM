@@ -17,12 +17,13 @@
             </div>
             <div class="config-item">
                 <label>モデル:</label>
-                <select id="modelSelect">
+                <select id="modelSelect" disabled>
                     <option value="">モデルを選択してください</option>
                 </select>
             </div>
             <div class="config-buttons">
                 <button onclick="loadModels()" id="loadModelsBtn">モデル一覧取得</button>
+                <button onclick="resetModelSelection()" id="resetModelBtn">モデル再選択</button>
                 <button onclick="testConnection()" id="testBtn">接続テスト</button>
             </div>
         </div>
