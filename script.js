@@ -55,25 +55,7 @@ async function loadModels() {
     loadBtn.textContent = 'モデル一覧取得';
 }
 
-// モデル選択をリセットする関数
-function resetModelSelection() {
-    const modelSelect = document.getElementById('modelSelect');
-    const resetBtn = document.getElementById('resetModelBtn');
-    
-    resetBtn.disabled = true;
-    resetBtn.textContent = 'リセット中...';
-    
-    // セレクトボックスを有効化
-    modelSelect.disabled = false;
-    
-    // 選択をクリア
-    modelSelect.selectedIndex = 0;
-    
-    showStatus('✓ モデル選択をリセットしました。新しいモデルを選択してください。');
-    
-    resetBtn.disabled = false;
-    resetBtn.textContent = 'モデル再選択';
-}
+
 
 function addMessage(text, isUser) {
     const div = document.createElement('div');
