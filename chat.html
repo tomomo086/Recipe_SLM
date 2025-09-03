@@ -393,6 +393,7 @@
         <div class="input-area">
             <input type="text" id="userInput" placeholder="質問を入力..." onkeypress="if(event.key==='Enter') sendMessage()">
             <button onclick="sendMessage()" id="sendBtn">送信</button>
+            <button onclick="clearChat()" id="clearBtn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">クリア</button>
         </div>
     </div>
 
@@ -503,6 +504,12 @@
             sendBtn.textContent = '送信';
         }
 
+        function clearChat() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            showStatus('✓ チャット履歴をクリアしました');
+        }
+        
         // 初期化
         //addMessage('CORS対応版チャットシステム起動', false);
         //addMessage('まず「接続テスト」で動作確認してください', false);
