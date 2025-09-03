@@ -68,12 +68,12 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
   <table>
     <tr>
       <td align="center">
-        <img src="photo/スマホ画面上側.png" alt="チャット画面上部" width="280"/>
+        <img src="images/スマホ画面上側.png" alt="チャット画面上部" width="280"/>
         <br/><strong>🔝 チャット画面上部</strong>
         <br/>接続テストなどの情報
       </td>
       <td align="center">
-        <img src="photo/スマホ画面下側.png" alt="チャット画面下部" width="280"/>
+        <img src="images/スマホ画面下側.png" alt="チャット画面下部" width="280"/>
         <br/><strong>💬 チャット画面下部</strong>
         <br/>AI応答とメッセージ履歴
       </td>
@@ -112,7 +112,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 ### LM Studio の設定（APIサーバー）
 
 <div align="center">
-  <img src="photo/LMstudio全体.png" alt="LM Studio全体画面" width="600"/>
+  <img src="images/LMstudio全体.png" alt="LM Studio全体画面" width="600"/>
 </div>
 
 **⚠️ これはアプリケーション画面ではありません。APIサーバーの設定画面です。**
@@ -125,7 +125,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 ### システムプロンプトの設定例
 
 <div align="center">
-  <img src="photo/システムプロンプト.png" alt="システムプロンプト設定" width="500"/>
+  <img src="images/システムプロンプト.png" alt="システムプロンプト設定" width="500"/>
 </div>
 
 **⚠️ これはLM Studioの設定画面です。アプリケーション画面ではありません。**
@@ -133,7 +133,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 ### APIサーバーとしての設定（画面を閉じても動作継続）
 
 <div align="center">
-  <img src="photo/画面を閉じても起動したままにできる証拠の設定.png" alt="APIの参照先として起動したままにできる" width="400"/>
+  <img src="images/画面を閉じても起動したままにできる証拠の設定.png" alt="APIの参照先として起動したままにできる" width="400"/>
 </div>
 
 **⚠️ これはLM Studioの設定画面です。アプリケーション画面ではありません。**
