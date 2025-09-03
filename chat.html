@@ -529,7 +529,7 @@
                                 const data = line.slice(6);
                                 if (data === '[DONE]') {
                                     showStatus('✓ 応答完了');
-                                    return;
+                                    break; // returnではなくbreakを使用
                                 }
 
                                 try {
@@ -554,10 +554,11 @@
             } catch (error) {
                 addMessage('エラー: ' + error.message, false);
                 showStatus('送信エラー: ' + error.message, true);
+            } finally {
+                // 必ずボタンの状態を復元
+                sendBtn.disabled = false;
+                sendBtn.textContent = '送信';
             }
-
-            sendBtn.disabled = false;
-            sendBtn.textContent = '送信';
         }
 
         function clearChat() {
