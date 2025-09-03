@@ -1,20 +1,44 @@
 # 🍽️ Recipe SLM - 献立補助AIアシスタント
+## 🎓 ポートフォリオ作品
 
-> **ローカルLLMを活用した、プライベート＆オフライン対応の献立提案システム**
+![Platform: Web | Local LLM](https://img.shields.io/badge/Platform-Web%20%7C%20Local%20LLM-green.svg)
+![Language: JavaScript | HTML | CSS](https://img.shields.io/badge/Language-JavaScript%20%7C%20HTML%20%7C%20CSS-orange.svg)
+![AI Development: LM Studio](https://img.shields.io/badge/AI%20Development-LM%20Studio-blue.svg)
+![PWA Ready](https://img.shields.io/badge/PWA-Ready-success.svg)
 
-[![PWA Ready](https://img.shields.io/badge/PWA-Ready-success?style=flat-square)](https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps)
-[![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-blue?style=flat-square)](#-スマホでの表示例)
-[![Offline Support](https://img.shields.io/badge/Offline-Support-green?style=flat-square)](#-pwa機能)
+![Status: Portfolio](https://img.shields.io/badge/Status-Portfolio-purple.svg)
 
-スマートフォンでも快適に使えるPWA対応の献立提案アプリケーションです。LM StudioとローカルSLM（Small Language Model）を組み合わせることで、**完全にプライベートな環境**で献立の相談ができます。
+**ローカルSLM（Small Language Model）を活用した献立提案PWAアプリケーション**
 
-## 🌟 プロジェクトのハイライト
+LM StudioとローカルSLM（Small Language Model）を組み合わせることで、**完全にプライベートな環境**でスマートフォンからも献立の相談ができます。
 
-- **🏠 完全ローカル実行**: LM Studio + SLMでプライベート環境での献立相談
-- **🤖 献立特化AI**: システムプロンプトで献立アシスタント向けに最適化
-- **📱 どこでも利用**: PWA対応でスマートフォンからもアクセス可能
-- **🔓 オープンソース**: ローカルLLMの活用例として自由に改変可能
-- **💡 学習用途**: SLMの実用的な活用方法を実証
+> ⚠️ **注意**: これはポートフォリオ・学習目的の作品です。個人利用を想定しており、商用利用は想定しておりません。
+
+## 📸 プロジェクトレジュメ
+
+### 実機の様子
+
+**デモ動画**: [photo/デモ動画.mp4](photo/デモ動画.mp4)
+
+### パフォーマンス
+
+| 項目 | 性能 |
+|------|------|
+| レスポンス速度 | ローカルSLMに依存 |
+| 対応デバイス | スマートフォン・タブレット・PC |
+| オフライン利用 | 完全対応（PWA） |
+| プライバシー | 完全ローカル処理 |
+
+## 🎯 プロジェクト概要
+
+LM StudioとローカルSLM（Small Language Model）を組み合わせた**完全プライベート**な献立提案システムです。
+
+**ローカルLLM活用**の実践例として、プライバシーを重視しながらAI技術を日常生活に取り入れる可能性を実証したプロジェクトです。
+
+### 主な機能
+- **献立提案**: 食材・予算・栄養を考慮した献立提案
+- **対話形式**: 自然な会話でのやり取り
+- **PWA対応**: スマートフォンでアプリのように利用可能
 
 ## 🎬 デモ動画
 
@@ -212,9 +236,45 @@ APIサーバーの設定やモデルの選択が可能です。
 - **プライバシー保護**: 個人データを外部に送信しない安全なAI活用
 - **学習成果**: ローカルLLM環境の構築から実用化までの一連の流れを習得
 
+## 📄 ライセンス・利用について
+
+**ポートフォリオ・学習目的の作品**
+
+このプロジェクトは技術学習・ポートフォリオ展示のために制作されたものです。  
+ソースコード閲覧・技術参考は自由ですが、商用利用は想定しておりません。
+
+## 🔧 開発環境・ツール
+
+このプロジェクトの開発には以下のツールを使用しました：
+
+- **LM Studio**: ローカルLLM実行環境
+- **開発ツール**: VS Code, Claude Code
+- **AI支援機能**: コード生成・リファクタリング
+
 ---
 
-**🌟 ポートフォリオとして:** ローカルLLM(SLM)の実用的な活用例として、プライバシーを重視しながらAI技術を日常生活に取り入れる可能性を実証したプロジェクトです。
+## 📋 開発情報
+
+| 開発者 | tomomo086 + Claude |
+|--------|-------------------|
+| 開発期間 | 2025年9月 |
+| バージョン | 1.0.0 |
+| 開発ツール | Claude Code, LM Studio |
+
+## 🔗 関連リンク
+
+- [tomomo086: Github](https://github.com/tomomo086)
+- [@mirai_sousiyo39: X](https://x.com/mirai_sousiyo39)
+
+---
+
+**作成者**: [tomomo086(@mirai_sousiyo39) + Claude]  
+**最終更新**: 2025年9月3日
+
+🤖 **AI駆動開発の実践例**
+
+このREADMEもClaudeによるAI支援で作成されています。  
+本プロジェクトは、ローカルLLMとPWA技術を組み合わせた実践として制作した作品です。
 
 ---
 
