@@ -361,6 +361,22 @@
             }
         }
         
+        /* タイピングアニメーション用のカーソル */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #667eea;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
         /* ローディングアニメーション */
         .loading {
             display: inline-block;
@@ -465,6 +481,13 @@
             sendBtn.textContent = '送信中...';
 
             try {
+                // AIの応答用のメッセージ要素を作成
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.className = 'message ai';
+                aiMessageDiv.textContent = '';
+                document.getElementById('messages').appendChild(aiMessageDiv);
+                document.getElementById('messages').scrollTop = 999999;
+
                 const response = await fetch(apiUrl + '/v1/chat/completions', {
                     method: 'POST',
                     headers: {
@@ -478,7 +501,8 @@
                                 content: message
                             }
                         ],
-                        temperature: 0.7
+                        temperature: 0.7,
+                        stream: true  // ストリーミングを有効化
                     })
                 });
 
@@ -486,14 +510,46 @@
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
 
-                const data = await response.json();
-                
-                if (data.choices && data.choices.length > 0) {
-                    addMessage(data.choices[0].message.content, false);
-                    showStatus('✓ 応答受信完了');
-                } else {
-                    throw new Error('応答データが不正です');
+                // ストリーミング応答を処理
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+
+                try {
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        buffer += decoder.decode(value, { stream: true });
+                        const lines = buffer.split('\n');
+                        buffer = lines.pop() || '';
+
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                const data = line.slice(6);
+                                if (data === '[DONE]') {
+                                    showStatus('✓ 応答完了');
+                                    return;
+                                }
+
+                                try {
+                                    const parsed = JSON.parse(data);
+                                    if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content) {
+                                        const content = parsed.choices[0].delta.content;
+                                        aiMessageDiv.textContent += content;
+                                        document.getElementById('messages').scrollTop = 999999;
+                                    }
+                                } catch (e) {
+                                    // JSONパースエラーは無視
+                                }
+                            }
+                        }
+                    }
+                } finally {
+                    reader.releaseLock();
                 }
+
+                showStatus('✓ 応答完了');
 
             } catch (error) {
                 addMessage('エラー: ' + error.message, false);
