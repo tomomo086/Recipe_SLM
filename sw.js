@@ -1,10 +1,11 @@
 const CACHE_NAME = 'recipe-ai-v1';
 const urlsToCache = [
-  '/',
-  '/chat.html',
-  '/script.js',
-  '/styles.css',
-  '/manifest.json'
+  './',
+  './chat.html',
+  './script.js',
+  './styles.css',
+  './manifest.json',
+  './icon.svg'
 ];
 
 // インストール時にキャッシュを作成
@@ -44,7 +45,7 @@ self.addEventListener('fetch', event => {
           .catch(() => {
             // オフライン時のフォールバック
             if (event.request.destination === 'document') {
-              return caches.match('/chat.html');
+              return caches.match('./chat.html');
             }
           });
       })
