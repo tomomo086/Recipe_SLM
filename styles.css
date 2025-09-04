@@ -36,107 +36,7 @@ h2 {
     letter-spacing: -0.5px;
 }
 
-.config { 
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 30px; 
-    margin-bottom: 30px; 
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
-}
 
-.config::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-}
-
-.config-item {
-    margin-bottom: 20px;
-    font-weight: 500;
-    color: #34495e;
-}
-
-.config-item label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.config-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-.config-buttons button {
-    flex: 1;
-    min-width: 150px;
-}
-
-.config input { 
-    width: 100%; 
-    margin: 8px 0; 
-    padding: 15px 20px;
-    border: 2px solid #e1e8ed; 
-    border-radius: 12px;
-    font-size: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.config input:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-    transform: translateY(-1px);
-}
-
-.config select {
-    width: 100%;
-    margin: 8px 0;
-    padding: 15px 20px;
-    border: 2px solid #e1e8ed;
-    border-radius: 12px;
-    font-size: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-}
-
-.config select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-    transform: translateY(-1px);
-}
-
-.config select:hover {
-    border-color: #667eea;
-    transform: translateY(-1px);
-}
-
-.config select:disabled {
-    background: #f8f9fa;
-    color: #6c757d;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.config select:disabled:hover {
-    border-color: #e1e8ed;
-    transform: none;
-}
 
 .messages { 
     height: 600px; 
@@ -392,20 +292,7 @@ button:disabled {
         margin-bottom: 25px;
     }
     
-    .config {
-        padding: 20px;
-        border-radius: 16px;
-    }
-    
-    .config-buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .config-buttons button {
-        min-width: auto;
-        width: 100%;
-    }
+
     
     .messages {
         height: 400px;
@@ -542,9 +429,7 @@ button:disabled {
         min-height: 44px;
     }
     
-    .config-buttons button {
-        min-height: 50px;
-    }
+
     
     .input-area button {
         min-height: 50px;
@@ -634,14 +519,7 @@ button:disabled {
         color: #ecf0f1;
     }
     
-    .config {
-        background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-        color: #ecf0f1;
-    }
-    
-    .config-item label {
-        color: #ecf0f1;
-    }
+
     
     .ai {
         background: #34495e;

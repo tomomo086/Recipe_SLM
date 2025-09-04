@@ -1,61 +1,8 @@
-// モデル一覧を取得する関数
-async function loadModels() {
-    const loadBtn = document.getElementById('loadModelsBtn');
-    const apiUrl = document.getElementById('apiUrl').value;
-    const modelSelect = document.getElementById('modelSelect');
-    
-    loadBtn.disabled = true;
-    loadBtn.textContent = '取得中...';
-    
-    try {
-        // LM Studioのモデル一覧APIを呼び出し
-        const response = await fetch(apiUrl + '/v1/models', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            
-            // 既存のオプションをクリア（最初のオプションは残す）
-            while (modelSelect.children.length > 1) {
-                modelSelect.removeChild(modelSelect.lastChild);
-            }
-            
-            // モデル一覧をドロップダウンに追加
-            if (data.data && data.data.length > 0) {
-                data.data.forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model.id;
-                    option.textContent = model.id;
-                    modelSelect.appendChild(option);
-                });
-                
-                // 最初のモデルを選択して固定
-                if (modelSelect.children.length > 1) {
-                    modelSelect.selectedIndex = 1;
-                    // 選択後、セレクトボックスを無効化
-                    modelSelect.disabled = true;
-                }
-                
-                showStatus('✓ モデル一覧を取得しました（モデル選択は固定されています）');
-            } else {
-                showStatus('⚠ 利用可能なモデルが見つかりません', true);
-            }
-        } else {
-            throw new Error('HTTP ' + response.status);
-        }
-    } catch (error) {
-        showStatus('✗ モデル一覧取得エラー: ' + error.message, true);
-    }
-    
-    loadBtn.disabled = false;
-    loadBtn.textContent = 'モデル一覧取得';
-}
-
-
+// 固定のAPI設定
+const API_CONFIG = {
+    url: 'http://192.168.2.107:1234',
+    model: 'local-model' // デフォルトモデル名
+};
 
 function addMessage(text, isUser) {
     const div = document.createElement('div');
@@ -71,63 +18,12 @@ function showStatus(message, isError = false) {
     statusDiv.textContent = message;
 }
 
-// CORSを回避するため、シンプルなfetchを使用
-async function testConnection() {
-    const testBtn = document.getElementById('testBtn');
-    const apiUrl = document.getElementById('apiUrl').value;
-    const selectedModel = document.getElementById('modelSelect').value;
-    
-    if (!selectedModel) {
-        showStatus('⚠ モデルを選択してください', true);
-        return;
-    }
-    
-    testBtn.disabled = true;
-    testBtn.textContent = '接続中...';
-    
-    try {
-        // CORSエラーを回避するため、直接チャット機能をテスト
-        const testResponse = await fetch(apiUrl + '/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: document.getElementById('modelSelect').value,
-                messages: [
-                    { role: "user", content: "Hello" }
-                ],
-                max_tokens: 10
-            })
-        });
-        
-        if (testResponse.ok) {
-            const data = await testResponse.json();
-            showStatus('✓ API接続成功！LMStudioと正常に通信できます');
-        } else {
-            throw new Error('HTTP ' + testResponse.status);
-        }
-    } catch (error) {
-        showStatus('✗ 接続エラー: ' + error.message, true);
-    }
-    
-    testBtn.disabled = false;
-    testBtn.textContent = '接続テスト';
-}
-
 async function sendMessage() {
     const input = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
-    const apiUrl = document.getElementById('apiUrl').value;
-    const modelName = document.getElementById('modelSelect').value;
     
     const message = input.value.trim();
     if (!message) return;
-    
-    if (!modelName) {
-        showStatus('⚠ モデルを選択してください', true);
-        return;
-    }
 
     addMessage(message, true);
     input.value = '';
@@ -142,13 +38,13 @@ async function sendMessage() {
         document.getElementById('messages').appendChild(aiMessageDiv);
         document.getElementById('messages').scrollTop = 999999;
 
-        const response = await fetch(apiUrl + '/v1/chat/completions', {
+        const response = await fetch(API_CONFIG.url + '/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: modelName,
+                model: API_CONFIG.model,
                 messages: [
                     {
                         role: "user",
@@ -282,16 +178,10 @@ function optimizeForMobile() {
 }
 
 // 初期化
-//addMessage('CORS対応版チャットシステム起動', false);
-//addMessage('まず「接続テスト」で動作確認してください', false);
-
-// ページ読み込み時にモデル一覧を自動取得
 document.addEventListener('DOMContentLoaded', function() {
-    // 少し遅延させてからモデル一覧を取得
-    setTimeout(() => {
-        loadModels();
-    }, 500);
-    
     // スマホ最適化を適用
     optimizeForMobile();
+    
+    // 起動メッセージを表示
+    showStatus('✓ ポケット献立アシスタントが起動しました');
 });
