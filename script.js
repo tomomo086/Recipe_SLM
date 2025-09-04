@@ -134,9 +134,21 @@ function optimizeForMobile() {
             }, 300);
         });
     });
-    
-    // 長押しメニューを無効化
+
     document.addEventListener('contextmenu', function(event) {
+        // テキストが選択されている場合はコンテキストメニューを許可
+        const selection = window.getSelection();
+        if (selection && selection.toString().length > 0) {
+            return; // メニューを表示させる
+        }
+        
+        // 入力フィールド内でのコンテキストメニューは許可
+        const target = event.target;
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+            return; // メニューを表示させる
+        }
+        
+        // その他の場合は無効化（画像の長押しメニュー等を防ぐ）
         event.preventDefault();
     });
     
