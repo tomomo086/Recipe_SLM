@@ -62,7 +62,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 
 ## 📱 アプリケーション画面（スマホでの表示例）
 
-**実際のアプリケーション画面 - スマートフォンでの美しいUI体験**
+**実際のアプリケーション画面**
 
 <div align="center">
   <table>
