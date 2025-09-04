@@ -145,19 +145,26 @@ function optimizeForMobile() {
     let startY = 0;
     let isSwiping = false;
     
-    // 統合されたtouchstartリスナー - マルチタッチ防止とスワイプ開始を同時処理
+    // 統合されたtouchstartリスナー - 2本指ズーム防止とスワイプ開始を同時処理
     document.addEventListener('touchstart', function(event) {
-        // マルチタッチの場合は防止（ズーム防止）
-        if (event.touches.length > 1) {
+        // 2本指ズームのみ防止（3本指以上のシステム操作は許可）
+        if (event.touches.length === 2) {
             event.preventDefault();
             return;
         }
         
+        // 3本指以上の場合はシステム操作を優先（スクリーンショット等）
+        if (event.touches.length > 2) {
+            return; // preventDefault()を呼ばずにシステムに処理を委ねる
+        }
+        
         // シングルタッチの場合のスワイプ開始処理
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
-        isSwiping = false;
-    }, { passive: false }); // マルチタッチ防止のためpassive: falseが必要
+        if (event.touches.length === 1) {
+            startX = event.touches[0].clientX;
+            startY = event.touches[0].clientY;
+            isSwiping = false;
+        }
+    }, { passive: false }); // 2本指ズーム防止のためpassive: falseが必要
     
     document.addEventListener('touchmove', function(event) {
         if (!isSwiping && event.touches.length === 1) {
