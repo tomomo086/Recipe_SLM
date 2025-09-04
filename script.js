@@ -146,6 +146,14 @@ async function sendMessage() {
             reader.releaseLock();
         }
 
+        // ストリーミング完了後に詳細表示ボタンを追加
+        const finalText = aiMessageDiv.textContent;
+        if (finalText && finalText.trim().length > 0) {
+            // 既存のメッセージを削除して、ボタン付きで再作成
+            aiMessageDiv.remove();
+            addMessage(finalText, false);
+        }
+
         showStatus('✓ 応答完了');
 
     } catch (error) {
