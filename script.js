@@ -113,7 +113,12 @@ async function sendMessage() {
 
 function clearChat() {
     const messagesDiv = document.getElementById('messages');
+    // ウェルカムメッセージを除くすべてのメッセージを削除
+    const welcomeMessage = messagesDiv.querySelector('.welcome-message');
     messagesDiv.innerHTML = '';
+    if (welcomeMessage) {
+        messagesDiv.appendChild(welcomeMessage);
+    }
     showStatus('✓ チャット履歴をクリアしました');
 }
 

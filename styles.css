@@ -1,3 +1,115 @@
+/* ウェルカムメッセージ用のスタイル */
+.welcome-message {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-left: 4px solid #f093fb;
+    margin-right: 0;
+    margin-left: 0;
+    text-align: left;
+}
+
+.welcome-message::before {
+    display: none;
+}
+
+.welcome-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: white;
+}
+
+.welcome-content p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+}
+
+.welcome-content .example-queries {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.welcome-content .example-queries p {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.welcome-content .example-queries ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.welcome-content .example-queries li {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.welcome-content .tip {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0 0 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .welcome-content h3 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+    }
+    
+    .welcome-content p {
+        margin-bottom: 12px;
+    }
+    
+    .welcome-content .example-queries {
+        padding: 12px;
+        margin: 12px 0;
+    }
+    
+    .welcome-content .example-queries li {
+        margin: 6px 0;
+    }
+    
+    .welcome-content .tip {
+        padding: 10px;
+        margin: 12px 0 0 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-content h3 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    
+    .welcome-content p {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    
+    .welcome-content .example-queries {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .welcome-content .example-queries li {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+    
+    .welcome-content .tip {
+        padding: 8px;
+        margin: 10px 0 0 0;
+        font-size: 14px;
+    }
+}
+
+/* 既存のスタイル */
 * { 
     box-sizing: border-box; 
     margin: 0; 

@@ -22,10 +22,28 @@
         <h2>ポケット献立アシスタント</h2>
         
         <div id="status"></div>
-        <div class="messages" id="messages"></div>
+        <div class="messages" id="messages">
+            <!-- 初期メッセージ -->
+            <div class="message ai welcome-message">
+                <div class="welcome-content">
+                    <h3>🎯 ポケット献立アシスタントへようこそ！</h3>
+                    <p>いつも作っているメニューから、新しい献立のアイデアを提案します。</p>
+                    <div class="example-queries">
+                        <p><strong>例：</strong></p>
+                        <ul>
+                            <li>「カレー、ハンバーグ、パスタを作っている」</li>
+                            <li>「和食中心で、魚料理が好き」</li>
+                            <li>「簡単で時短できる料理を教えて」</li>
+                            <li>「今日は何を作ろうかな？」</li>
+                        </ul>
+                    </div>
+                    <p class="tip">💡 あなたの好みやよく作る料理を教えてください！</p>
+                </div>
+            </div>
+        </div>
         
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="質問を入力..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <input type="text" id="userInput" placeholder="いつも作っているメニューや好みを教えてください..." onkeypress="if(event.key==='Enter') sendMessage()">
             <button onclick="sendMessage()" id="sendBtn">送信</button>
             <button onclick="clearChat()" id="clearBtn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">クリア</button>
         </div>
