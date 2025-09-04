@@ -145,15 +145,31 @@ body {
 h2 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 2em;
-    font-weight: 300;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -0.5px;
     flex-shrink: 0;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 
@@ -437,6 +453,12 @@ button:disabled {
         padding: 15px 20px;
     }
     
+    h2::after {
+        width: 60px;
+        height: 2px;
+        bottom: -6px;
+    }
+    
     .messages {
         padding: 15px;
         margin: 10px 0;
@@ -495,6 +517,12 @@ button:disabled {
         margin-bottom: 15px;
         font-weight: 800;
         padding: 12px 15px;
+    }
+    
+    h2::after {
+        width: 50px;
+        height: 2px;
+        bottom: -5px;
     }
     
     .messages {
@@ -638,6 +666,19 @@ button:disabled {
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+/* タイトルのグローアニメーション */
+@keyframes titleGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.5));
+    }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(102, 126, 234, 0.7));
     }
 }
 
