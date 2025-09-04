@@ -8,33 +8,50 @@ function addMessage(text, isUser) {
     const div = document.createElement('div');
     div.className = 'message ' + (isUser ? 'user' : 'ai');
     
-    // AIメッセージに詳細表示ボタンを追加
-    if (!isUser && !div.classList.contains('welcome-message')) {
-        // メッセージコンテナを作成
-        const messageContainer = document.createElement('div');
-        messageContainer.className = 'message-container';
+    // デバッグ用ログ
+    console.log('addMessage called:', { text: text.substring(0, 50), isUser });
+    
+    // AIメッセージに詳細表示ボタンを追加（ウェルカムメッセージ以外）
+    if (!isUser) {
+        // ウェルカムメッセージかどうかをテキスト内容で判定
+        const isWelcomeMessage = text.includes('ポケット献立アシスタントへようこそ');
         
-        // メッセージテキスト部分
-        const messageText = document.createElement('div');
-        messageText.className = 'message-text';
-        messageText.textContent = text;
+        console.log('AI message detected, isWelcomeMessage:', isWelcomeMessage);
         
-        // 詳細表示ボタン
-        const detailButton = document.createElement('button');
-        detailButton.className = 'detail-btn';
-        detailButton.innerHTML = '📖';
-        detailButton.title = '詳細表示';
-        detailButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            showMessageModal(text);
-        });
-        
-        // 要素を組み合わせ
-        messageContainer.appendChild(messageText);
-        messageContainer.appendChild(detailButton);
-        div.appendChild(messageContainer);
+        if (!isWelcomeMessage) {
+            // メッセージコンテナを作成
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            
+            // メッセージテキスト部分
+            const messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.textContent = text;
+            
+            // 詳細表示ボタン
+            const detailButton = document.createElement('button');
+            detailButton.className = 'detail-btn';
+            detailButton.innerHTML = '📖';
+            detailButton.title = '詳細表示';
+            detailButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('Detail button clicked');
+                showMessageModal(text);
+            });
+            
+            console.log('Button created and added');
+            
+            // 要素を組み合わせ
+            messageContainer.appendChild(messageText);
+            messageContainer.appendChild(detailButton);
+            div.appendChild(messageContainer);
+        } else {
+            // ウェルカムメッセージは従来通り
+            div.textContent = text;
+            div.classList.add('welcome-message');
+        }
     } else {
-        // ユーザーメッセージまたはウェルカムメッセージは従来通り
+        // ユーザーメッセージは従来通り
         div.textContent = text;
     }
     
