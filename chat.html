@@ -51,6 +51,19 @@
 
     <script src="script.js"></script>
     
+    <!-- メッセージ詳細表示モーダル -->
+    <div id="messageModal" class="message-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>メッセージ詳細</h3>
+                <button id="closeModal" class="close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="modalMessageContent"></div>
+            </div>
+        </div>
+    </div>
+    
     <!-- PWAインストール促進 -->
     <div id="installPrompt" class="install-prompt" style="display: none;">
         <div class="install-content">

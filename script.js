@@ -7,7 +7,54 @@ const API_CONFIG = {
 function addMessage(text, isUser) {
     const div = document.createElement('div');
     div.className = 'message ' + (isUser ? 'user' : 'ai');
-    div.textContent = text;
+    
+    // デバッグ用ログ
+    console.log('addMessage called:', { text: text.substring(0, 50), isUser });
+    
+    // AIメッセージに詳細表示ボタンを追加（ウェルカムメッセージ以外）
+    if (!isUser) {
+        // ウェルカムメッセージかどうかをテキスト内容で判定
+        const isWelcomeMessage = text.includes('ポケット献立アシスタントへようこそ');
+        
+        console.log('AI message detected, isWelcomeMessage:', isWelcomeMessage);
+        
+        if (!isWelcomeMessage) {
+            // メッセージコンテナを作成
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            
+            // メッセージテキスト部分
+            const messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.textContent = text;
+            
+            // 詳細表示ボタン
+            const detailButton = document.createElement('button');
+            detailButton.className = 'detail-btn';
+            detailButton.innerHTML = '📖';
+            detailButton.title = '詳細表示';
+            detailButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                console.log('Detail button clicked');
+                showMessageModal(text);
+            });
+            
+            console.log('Button created and added');
+            
+            // 要素を組み合わせ
+            messageContainer.appendChild(messageText);
+            messageContainer.appendChild(detailButton);
+            div.appendChild(messageContainer);
+        } else {
+            // ウェルカムメッセージは従来通り
+            div.textContent = text;
+            div.classList.add('welcome-message');
+        }
+    } else {
+        // ユーザーメッセージは従来通り
+        div.textContent = text;
+    }
+    
     document.getElementById('messages').appendChild(div);
     document.getElementById('messages').scrollTop = 999999;
 }
@@ -97,6 +144,14 @@ async function sendMessage() {
             }
         } finally {
             reader.releaseLock();
+        }
+
+        // ストリーミング完了後に詳細表示ボタンを追加
+        const finalText = aiMessageDiv.textContent;
+        if (finalText && finalText.trim().length > 0) {
+            // 既存のメッセージを削除して、ボタン付きで再作成
+            aiMessageDiv.remove();
+            addMessage(finalText, false);
         }
 
         showStatus('✓ 応答完了');
@@ -244,6 +299,26 @@ function startTypingAnimation() {
     typeText();
 }
 
+// メッセージモーダル表示機能
+function showMessageModal(messageText) {
+    const modal = document.getElementById('messageModal');
+    const modalContent = document.getElementById('modalMessageContent');
+    
+    modalContent.textContent = messageText;
+    modal.style.display = 'flex';
+    
+    // bodyのスクロールを無効化
+    document.body.style.overflow = 'hidden';
+}
+
+function hideMessageModal() {
+    const modal = document.getElementById('messageModal');
+    modal.style.display = 'none';
+    
+    // bodyのスクロールを有効化
+    document.body.style.overflow = '';
+}
+
 // 初期化
 document.addEventListener('DOMContentLoaded', function() {
     // スマホ最適化を適用
@@ -251,6 +326,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // タイピングアニメーション開始
     startTypingAnimation();
+    
+    // モーダル機能の初期化
+    const modal = document.getElementById('messageModal');
+    const closeBtn = document.getElementById('closeModal');
+    
+    // 閉じるボタンのクリックイベント
+    closeBtn.addEventListener('click', hideMessageModal);
+    
+    // モーダル背景クリックで閉じる
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            hideMessageModal();
+        }
+    });
+    
+    // ESCキーで閉じる
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            hideMessageModal();
+        }
+    });
     
     // 起動メッセージを表示
     showStatus('✓ ポケット献立アシスタントが起動しました');
