@@ -182,10 +182,55 @@ function optimizeForMobile() {
     });
 }
 
+// タイピングアニメーション機能
+function startTypingAnimation() {
+    const input = document.getElementById('userInput');
+    const placeholders = JSON.parse(input.getAttribute('data-placeholders'));
+    let currentIndex = 0;
+    let currentText = '';
+    let isDeleting = false;
+    
+    function typeText() {
+        const currentPlaceholder = placeholders[currentIndex];
+        
+        if (isDeleting) {
+            // 文字を削除
+            currentText = currentPlaceholder.substring(0, currentText.length - 1);
+        } else {
+            // 文字を追加
+            currentText = currentPlaceholder.substring(0, currentText.length + 1);
+        }
+        
+        // プレースホルダーを更新
+        input.setAttribute('placeholder', currentText);
+        
+        let typeSpeed = isDeleting ? 50 : 100; // 削除の方が速い
+        
+        if (!isDeleting && currentText === currentPlaceholder) {
+            // 完全に表示されたら、少し待ってから削除開始
+            typeSpeed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && currentText === '') {
+            // 完全に削除されたら、次のメッセージへ
+            isDeleting = false;
+            currentIndex = (currentIndex + 1) % placeholders.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(typeText, typeSpeed);
+    }
+    
+    // アニメーション開始
+    typeText();
+}
+
 // 初期化
 document.addEventListener('DOMContentLoaded', function() {
     // スマホ最適化を適用
     optimizeForMobile();
+    
+    // タイピングアニメーション開始
+    startTypingAnimation();
     
     // 起動メッセージを表示
     showStatus('✓ ポケット献立アシスタントが起動しました');

@@ -299,6 +299,23 @@ input::placeholder {
     font-style: italic;
 }
 
+/* タイピングアニメーション用のプレースホルダー */
+.typing-placeholder {
+    color: #667eea;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: #667eea;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: text-bottom;
+}
+
 button { 
     padding: 15px 25px; 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

@@ -43,7 +43,7 @@
         </div>
         
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="「いつも」という言葉を含めて、よく作る料理や好みを教えてください..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <input type="text" id="userInput" data-placeholders='["今日はどんな料理を作りたいですか？", "献立に迷ったらここに質問を入力してください", "材料や調味料だけの相談もできます", "「いつも」という言葉を含めると、AIがあなたの好みを考慮します", "簡単な料理から本格的な料理まで、何でも相談してください"]' onkeypress="if(event.key==='Enter') sendMessage()">
             <button onclick="sendMessage()" id="sendBtn">送信</button>
             <button onclick="clearChat()" id="clearBtn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">クリア</button>
         </div>
