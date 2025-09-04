@@ -145,95 +145,20 @@ body {
 h2 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 25px;
-    font-size: 2.8em;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 70%, #ff6b9d 100%);
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 300;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.5px;
     flex-shrink: 0;
-    text-shadow: none;
-    position: relative;
-    padding: 20px 30px;
-    animation: titleGlow 3s ease-in-out infinite;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 30%, rgba(240, 147, 251, 0.08) 70%, rgba(255, 107, 157, 0.08) 100%);
-    border: 2px solid rgba(102, 126, 234, 0.15);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smooth: never;
 }
 
-h2::before {
-    content: '✨';
-    position: absolute;
-    top: -10px;
-    left: 20%;
-    font-size: 0.4em;
-    animation: sparkle 2s ease-in-out infinite;
-    z-index: 1;
-}
 
-h2::after {
-    content: '✨';
-    position: absolute;
-    top: -10px;
-    right: 20%;
-    font-size: 0.4em;
-    animation: sparkle 2s ease-in-out infinite 1s;
-    z-index: 1;
-}
 
-h2 .title-underline {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #ff6b9d);
-    border-radius: 3px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.6);
-    animation: titleUnderline 3s ease-in-out infinite;
-}
 
-@keyframes titleGlow {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.01);
-        opacity: 0.95;
-    }
-}
-
-@keyframes titleUnderline {
-    0%, 100% {
-        width: 100px;
-        opacity: 1;
-        transform: translateX(-50%) scaleX(1);
-    }
-    50% {
-        width: 150px;
-        opacity: 0.9;
-        transform: translateX(-50%) scaleX(1.1);
-    }
-}
-
-@keyframes sparkle {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(0.8) rotate(0deg);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2) rotate(180deg);
-    }
-}
 
 .messages { 
     flex: 1;
