@@ -3,7 +3,8 @@
 
 ![Platform: Web | Local LLM](https://img.shields.io/badge/Platform-Web%20%7C%20Local%20LLM-green.svg)
 ![Language: JavaScript | HTML | CSS](https://img.shields.io/badge/Language-JavaScript%20%7C%20HTML%20%7C%20CSS-orange.svg)
-![AI Development: LM Studio](https://img.shields.io/badge/AI%20Development-LM%20Studio-blue.svg)
+![AI Models: Claude | Gemini](https://img.shields.io/badge/AI%20Models-Claude%20%7C%20Gemini-blue.svg)
+![AI Platform: LM Studio](https://img.shields.io/badge/AI%20Platform-LM%20Studio-lightblue.svg)
 ![PWA Ready](https://img.shields.io/badge/PWA-Ready-success.svg)
 
 ![Status: Portfolio](https://img.shields.io/badge/Status-Portfolio-purple.svg)
