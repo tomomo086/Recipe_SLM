@@ -135,13 +135,6 @@ function optimizeForMobile() {
         });
     });
     
-    // ダブルタップズームを無効化（既にCSSで設定済み）
-    document.addEventListener('touchstart', function(event) {
-        if (event.touches.length > 1) {
-            event.preventDefault();
-        }
-    }, { passive: false });
-    
     // 長押しメニューを無効化
     document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
@@ -152,14 +145,22 @@ function optimizeForMobile() {
     let startY = 0;
     let isSwiping = false;
     
+    // 統合されたtouchstartリスナー - マルチタッチ防止とスワイプ開始を同時処理
     document.addEventListener('touchstart', function(event) {
+        // マルチタッチの場合は防止（ズーム防止）
+        if (event.touches.length > 1) {
+            event.preventDefault();
+            return;
+        }
+        
+        // シングルタッチの場合のスワイプ開始処理
         startX = event.touches[0].clientX;
         startY = event.touches[0].clientY;
         isSwiping = false;
-    });
+    }, { passive: false }); // マルチタッチ防止のためpassive: falseが必要
     
     document.addEventListener('touchmove', function(event) {
-        if (!isSwiping) {
+        if (!isSwiping && event.touches.length === 1) {
             const deltaX = Math.abs(event.touches[0].clientX - startX);
             const deltaY = Math.abs(event.touches[0].clientY - startY);
             
@@ -170,7 +171,7 @@ function optimizeForMobile() {
     });
     
     document.addEventListener('touchend', function(event) {
-        if (isSwiping) {
+        if (isSwiping && event.changedTouches.length === 1) {
             const deltaX = event.changedTouches[0].clientX - startX;
             if (deltaX > 100) {
                 // 右スワイプでチャット履歴をクリア
