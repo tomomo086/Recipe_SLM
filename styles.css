@@ -351,10 +351,7 @@ button:disabled {
         margin-bottom: 20px;
     }
     
-    .config {
-        padding: 15px;
-        border-radius: 12px;
-    }
+
     
     .messages {
         height: 350px;
