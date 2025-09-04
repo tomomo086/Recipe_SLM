@@ -492,13 +492,13 @@ button:disabled {
     h2 {
         font-size: 2.2em;
         margin-bottom: 18px;
-        font-weight: 800;
-        padding: 15px 20px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
     }
     
     h2::after {
-        width: 60px;
-        height: 2px;
+        width: 70px;
+        height: 2.5px;
         bottom: -6px;
     }
     
@@ -556,14 +556,14 @@ button:disabled {
     }
     
     h2 {
-        font-size: 2.0em;
+        font-size: 1.8em;
         margin-bottom: 15px;
-        font-weight: 800;
-        padding: 12px 15px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
     }
     
     h2::after {
-        width: 50px;
+        width: 60px;
         height: 2px;
         bottom: -5px;
     }
