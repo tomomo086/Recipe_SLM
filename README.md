@@ -16,10 +16,6 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせること
 
 ## 📸 プロジェクトレジュメ
 
-### 実機の様子
-
-**デモ動画**: [YouTube で視聴](https://youtube.com/shorts/aHcy0FfQDBA?feature=share)
-
 ### パフォーマンス
 
 | 項目 | 性能 |
