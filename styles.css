@@ -142,15 +142,43 @@ body {
 h2 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 2em;
-    font-weight: 300;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin-bottom: 20px;
+    font-size: 2.4em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
     flex-shrink: 0;
+    text-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+    position: relative;
+    padding: 10px 0;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    animation: titleUnderline 2s ease-in-out infinite;
+}
+
+@keyframes titleUnderline {
+    0%, 100% {
+        width: 80px;
+        opacity: 1;
+    }
+    50% {
+        width: 120px;
+        opacity: 0.8;
+    }
 }
 
 .messages { 
@@ -407,8 +435,9 @@ button:disabled {
     }
     
     h2 {
-        font-size: 1.8em;
-        margin-bottom: 10px;
+        font-size: 2.0em;
+        margin-bottom: 15px;
+        font-weight: 700;
     }
     
     .messages {
@@ -465,8 +494,9 @@ button:disabled {
     }
     
     h2 {
-        font-size: 1.6em;
-        margin-bottom: 8px;
+        font-size: 1.8em;
+        margin-bottom: 12px;
+        font-weight: 700;
     }
     
     .messages {
