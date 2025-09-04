@@ -18,7 +18,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせること
 
 ### 実機の様子
 
-**デモ動画**: [YouTube で視聴](https://youtu.be/iQlkL-AbpHE)
+**デモ動画**: [YouTube で視聴](https://youtube.com/shorts/aHcy0FfQDBA?feature=share)
 
 ### パフォーマンス
 
@@ -45,8 +45,8 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 > **実際の動作を見てみましょう！** スマートフォンでの操作感やAIとの対話の様子をご覧いただけます。
 
 <div align="center">
-  <a href="https://youtu.be/iQlkL-AbpHE">
-    <img src="https://img.youtube.com/vi/iQlkL-AbpHE/maxresdefault.jpg" alt="YouTube デモ動画" width="600"/>
+  <a href="https://youtube.com/shorts/aHcy0FfQDBA?feature=share">
+    <img src="https://img.youtube.com/vi/aHcy0FfQDBA/maxresdefault.jpg" alt="YouTube デモ動画" width="600"/>
     <br>
     <strong>📺 YouTube で実機デモを視聴</strong>
   </a>
@@ -58,7 +58,7 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 - 🎨 美しいグラデーションデザイン  
 - 🤖 献立特化AIの応答例
 
-> 📺 **YouTubeで視聴**: [https://youtu.be/iQlkL-AbpHE](https://youtu.be/iQlkL-AbpHE)
+> 📺 **YouTubeで視聴**: [https://youtube.com/shorts/aHcy0FfQDBA?feature=share](https://youtube.com/shorts/aHcy0FfQDBA?feature=share)
 
 ## 📱 アプリケーション画面（スマホでの表示例）
 
