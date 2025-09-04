@@ -1,3 +1,4 @@
-C:\Users\tomon\dev\projects\Recipe_SLM
+cd ~\Recipe_SLM
+Recipe_SLMフォルダへCMDにて移動
 
 python -m http.server 8000
