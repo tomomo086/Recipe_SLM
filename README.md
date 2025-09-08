@@ -1,4 +1,4 @@
-# 🍽️ Recipe SLM - 献立補助AIアシスタント
+# 🍽️ Recipe SLM - ポケット献立アシスタント
 ## 🎓 ポートフォリオ作品
 
 ![Platform: Web | Local LLM](https://img.shields.io/badge/Platform-Web%20%7C%20Local%20LLM-green.svg)
