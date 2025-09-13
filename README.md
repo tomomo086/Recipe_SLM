@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # 🍽️ Recipe SLM - ポケット献立アシスタント
+=======
+# 🍽️ Recipe SLM - 献立補助AIアシスタント
+>>>>>>> Stashed changes
 ## 🎓 ポートフォリオ作品
 
 ![Platform: Web | Local LLM](https://img.shields.io/badge/Platform-Web%20%7C%20Local%20LLM-green.svg)
@@ -116,6 +120,10 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせた**完�
 
 ## ✨ スマートフォンでの利用機能
 
+<<<<<<< Updated upstream
+=======
+- **🎯 スマート入力システム**: 5種類のローテーション・プレースホルダー自動切り替え
+>>>>>>> Stashed changes
 - **⚡ ストリーミング対話**: Server-Sent EventsによるリアルタイムAI応答
 - **📱 PWA完全対応**: Service Worker・Manifest・インストール促進機能
 - **🔄 自動最適化**: 画面回転対応・フォーカス時自動スクロール・タッチイベント最適化
