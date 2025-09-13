@@ -16,3 +16,6 @@ __pycache__/
 *$py.class
 node_modules/
 .cache/
+
+# プライベートレシピファイル（30件の完全版は非公開）
+data/recipes.json
