@@ -4,167 +4,29 @@ const API_CONFIG = {
     model: 'local-model' // デフォルトモデル名
 };
 
-// レシピデータ（ローカル）
-// 
-// 📝 新しいレシピの追加方法:
-// {
-//     "id": "recipe_XXX",                    // 一意のID (recipe_001, recipe_002, ...)
-//     "title": "料理名",                     // 検索でヒットしやすい名前を設定
-//     "cooking_time": "15分",               // 調理時間
-//     "ingredients": [                      // 材料リスト
-//         "材料1 分量",
-//         "材料2 分量"
-//     ],
-//     "instructions": [                     // 作り方の手順
-//         "手順1の説明",
-//         "手順2の説明"
-//     ],
-//     "main_ingredients": ["主要材料"],      // 検索用メイン材料（必須）
-//     "categories": ["teiban", "yasai"]     // 検索用カテゴリ（必須）
-// }
-//
-// 📋 利用可能カテゴリ: teiban, yasai, meat, fried, nabe, nimono
-// 🔍 検索テスト: レシピ追加後は必ず「○○の作り方教えて」でテスト実行！
-//
-const RECIPE_DATA = [
-    {
-        "id": "recipe_001",
-        "title": "しょうが焼き",
-        "aliases": ["生姜焼き", "豚の生姜焼き", "豚のしょうが焼き", "ジンジャーポーク"],
-        "cooking_time": "10分",
-        "ingredients": [
-            "豚ロース 300g",
-            "生姜チューブ 4cm", 
-            "砂糖 小さじ1",
-            "酒 大さじ1",
-            "醤油 大さじ2",
-            "みりん 大さじ2"
-        ],
-        "steps": [
-            "肉を焼く",
-            "混ぜたタレを加え、強火で煮詰める"
-        ],
-        "main_ingredients": ["豚肉", "豚ロース"],
-        "categories": ["teiban", "meat"],
-        "features": ["10分", "2ステップ", "失敗しない"],
-        "tips": "終始強火。タレは事前混合。ほぼ無くなるまで煮詰める。",
-        "substitutions": "豚こまOK。柔らかくしたいなら小麦粉をまぶし弱火で。"
-    },
-    {
-        "id": "recipe_002",
-        "title": "なすと豚肉のトロトロ照り焼き",
-        "aliases": ["なすの照り焼き", "茄子の照り焼き", "なす照り焼き", "なすと豚の炒め物"],
-        "cooking_time": "15分",
-        "ingredients": [
-            "なす 3本",
-            "ピーマン 2個",
-            "豚こま 150g",
-            "片栗粉 適量",
-            "油 大さじ1",
-            "酒 大さじ2",
-            "みりん 大さじ1",
-            "砂糖 大さじ1",
-            "しょうゆ 大さじ1"
-        ],
-        "steps": [
-            "なすに片栗粉をまぶす",
-            "豚肉→なすの順で炒める",
-            "ピーマンを加え、タレを絡める"
-        ],
-        "main_ingredients": ["なす", "ピーマン", "豚肉"],
-        "categories": ["yasai", "teiban"],
-        "features": ["15分", "黄金トリオ", "トロトロ食感"],
-        "tips": "なすの片栗粉がトロトロの秘訣。ピーマンは最後に入れる。",
-        "substitutions": "豚バラ, 牛肉, 鶏肉OK。ピーマンの代わりにパプリカ, 玉ねぎも可。"
-    },
-    {
-        "id": "recipe_003",
-        "title": "パン粉なしハンバーグ",
-        "aliases": ["ハンバーグ", "片栗粉ハンバーグ", "ふんわりハンバーグ"],
-        "cooking_time": "40分",
-        "ingredients": [
-            "合びき肉 250g",
-            "玉ねぎ 50g",
-            "卵 1個",
-            "塩 小さじ1/4",
-            "片栗粉 大さじ2",
-            "牛乳 大さじ1",
-            "こしょう 少々",
-            "ポン酢 大さじ3",
-            "水 大さじ1",
-            "砂糖 小さじ1"
-        ],
-        "steps": [
-            "肉と塩を粘りが出るまで捏ねる",
-            "残りの材料を加え成形し、両面に焼き色をつける",
-            "蓋をして弱火で8分蒸し焼き",
-            "ソースを煮詰めてかける"
-        ],
-        "main_ingredients": ["合いびき肉", "ひき肉"],
-        "categories": ["teiban", "meat"],
-        "features": ["40分", "片栗粉でふんわり", "肉汁キープ"],
-        "tips": "肉と塩を最初にしっかり捏ねる。透明な肉汁が焼き上がりのサイン。",
-        "substitutions": "チーズイン可。ソースはデミグラス等でも。"
-    },
-    {
-        "id": "recipe_004",
-        "title": "鯖缶とトマトのスパイスカレー",
-        "aliases": ["鯖缶カレー", "サバ缶カレー", "スパイスカレー", "無水カレー"],
-        "cooking_time": "10分",
-        "ingredients": [
-            "オリーブ油 20g",
-            "ニンニク 5g",
-            "ショウガ 5g",
-            "玉ねぎ 60g",
-            "塩 3g",
-            "スパイスパウダー 4g",
-            "カレー粉 2g",
-            "トマト 1個(240g)",
-            "鯖水煮缶 1缶(汁ごと)"
-        ],
-        "steps": [
-            "材料を鍋に上から順に入れる",
-            "蓋をして弱火で10分煮込む"
-        ],
-        "main_ingredients": ["鯖缶", "トマト", "カレー粉"],
-        "categories": ["curry", "healthy"],
-        "features": ["煮込み10分", "無水調理", "材料を入れるだけ"],
-        "tips": "材料の順番を守る。終始弱火。混ぜない。",
-        "substitutions": "鯖缶→ツナ缶, いわし缶OK。トマト→カットトマト缶OK。辛味は唐辛子で。"
-    },
-    {
-        "id": "recipe_005",
-        "title": "韓国風 甘辛豚丼",
-        "aliases": ["豚丼", "韓国風豚丼", "コチュジャン豚丼", "甘辛豚丼"],
-        "cooking_time": "15分",
-        "ingredients": [
-            "豚バラ肉 200g",
-            "玉ねぎ 中1個",
-            "ごはん 適量",
-            "しょうゆ 大さじ1と1/2",
-            "砂糖 大さじ1",
-            "酒 大さじ1",
-            "みりん 大さじ1",
-            "コチュジャン 小さじ1",
-            "ごま油 小さじ1",
-            "おろしにんにく 適量",
-            "おろししょうが 適量",
-            "白ごま 適量",
-            "温泉卵 適量"
-        ],
-        "steps": [
-            "タレを混ぜる",
-            "玉ねぎと豚肉を炒める",
-            "タレを加えて強火で煮絡める",
-            "ごはんに乗せてトッピング"
-        ],
-        "main_ingredients": ["豚丼", "豚バラ", "韓国風"],
-        "categories": ["korean", "meat", "rice"],
-        "features": ["コチュジャンとごま油で食欲増進", "甘辛味"],
-        "tips": "コチュジャンの量で辛さを調節（レシピは甘口）。",
-        "substitutions": "豚バラの代わりに他の部位の豚肉でも可。"
+// レシピデータ（外部JSONファイルから読み込み）
+// 新しいレシピの追加方法: data/recipes.json を編集してください
+let RECIPE_DATA = [];
+
+// レシピデータを読み込む関数
+async function loadRecipeData() {
+    try {
+        console.log('📖 レシピデータ読み込み開始...');
+        const response = await fetch('data/recipes.json');
+        if (!response.ok) {
+            throw new Error(`レシピファイルの読み込みに失敗: ${response.status}`);
+        }
+        const recipes = await response.json();
+        RECIPE_DATA = recipes;
+        console.log(`✅ レシピデータ読み込み完了: ${RECIPE_DATA.length}件のレシピ`);
+        showStatus(`✓ ${RECIPE_DATA.length}件のレシピを読み込みました`);
+    } catch (error) {
+        console.error('❌ レシピデータ読み込みエラー:', error);
+        showStatus('⚠️ レシピデータの読み込みに失敗しました', true);
+        // フォールバック: 空配列のまま継続
+        RECIPE_DATA = [];
     }
-];
+}
 
 // Function Tools定義
 const FUNCTION_TOOLS = [
@@ -845,7 +707,10 @@ function hideMessageModal() {
 }
 
 // 初期化
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // レシピデータを読み込み
+    await loadRecipeData();
+    
     // スマホ最適化を適用
     optimizeForMobile();
     
