@@ -60,11 +60,24 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせ、**Func
 > **実際の動作を見てみましょう！** スマートフォンでの操作感やAIとの対話の様子をご覧いただけます。
 
 <div align="center">
-  <a href="https://youtube.com/shorts/aHcy0FfQDBA?feature=share">
-    <img src="https://img.youtube.com/vi/aHcy0FfQDBA/maxresdefault.jpg" alt="YouTube デモ動画" width="600"/>
-    <br>
-    <strong>📺 YouTube で実機デモを視聴</strong>
-  </a>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://youtube.com/shorts/wMjhj4rWVgQ?feature=share">
+          <img src="https://img.youtube.com/vi/wMjhj4rWVgQ/maxresdefault.jpg" alt="YouTube デモ動画 前半" width="280"/>
+          <br>
+          <strong>📺 前半: 基本操作デモ</strong>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://youtube.com/shorts/dFtQVlaKm0M?feature=share">
+          <img src="https://img.youtube.com/vi/dFtQVlaKm0M/maxresdefault.jpg" alt="YouTube デモ動画 後半" width="280"/>
+          <br>
+          <strong>📺 後半: 詳細機能デモ</strong>
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>
 
 **🔥 動画で確認できるポイント:**
@@ -75,7 +88,9 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせ、**Func
 - 🤖 専門的な料理アドバイスと詳細レシピ
 - 🎨 グラデーションデザインと滑らかなアニメーション
 
-> 📺 **YouTubeで視聴**: [https://youtube.com/shorts/aHcy0FfQDBA?feature=share](https://youtube.com/shorts/aHcy0FfQDBA?feature=share)
+> 📺 **YouTubeで視聴**: 
+> - 前半: [https://youtube.com/shorts/wMjhj4rWVgQ?feature=share](https://youtube.com/shorts/wMjhj4rWVgQ?feature=share)
+> - 後半: [https://youtube.com/shorts/dFtQVlaKm0M?feature=share](https://youtube.com/shorts/dFtQVlaKm0M?feature=share)
 
 ## 📱 アプリケーション画面（スマホでの表示例）
 
