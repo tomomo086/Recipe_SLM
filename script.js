@@ -5,6 +5,27 @@ const API_CONFIG = {
 };
 
 // レシピデータ（ローカル）
+// 
+// 📝 新しいレシピの追加方法:
+// {
+//     "id": "recipe_XXX",                    // 一意のID (recipe_001, recipe_002, ...)
+//     "title": "料理名",                     // 検索でヒットしやすい名前を設定
+//     "cooking_time": "15分",               // 調理時間
+//     "ingredients": [                      // 材料リスト
+//         "材料1 分量",
+//         "材料2 分量"
+//     ],
+//     "instructions": [                     // 作り方の手順
+//         "手順1の説明",
+//         "手順2の説明"
+//     ],
+//     "main_ingredients": ["主要材料"],      // 検索用メイン材料（必須）
+//     "categories": ["teiban", "yasai"]     // 検索用カテゴリ（必須）
+// }
+//
+// 📋 利用可能カテゴリ: teiban, yasai, meat, fried, nabe, nimono
+// 🔍 検索テスト: レシピ追加後は必ず「○○の作り方教えて」でテスト実行！
+//
 const RECIPE_DATA = [
     {
         "id": "recipe_001",
@@ -164,10 +185,25 @@ function searchRecipes(parameters) {
     const results = RECIPE_DATA.map(recipe => {
         let score = 0;
         const searchText = keyword ? keyword.toLowerCase() : '';
+        
+        // キーワードを単語に分割（スペース、全角スペース区切り）
+        const searchWords = searchText.split(/[\s　]+/).filter(word => word.length > 0);
+        
+        console.log(`🔍 検索ワード: "${keyword}" → [${searchWords.join(', ')}]`);
+        console.log(`📝 レシピタイトル: "${recipe.title}"`);
 
-        // 料理名マッチング: +20点
+        // 料理名マッチング: 各単語について+20点
+        if (searchWords.length > 0) {
+            const titleLower = recipe.title.toLowerCase();
+            const matchedWords = searchWords.filter(word => titleLower.includes(word));
+            score += matchedWords.length * 20;
+            console.log(`📊 タイトルマッチ: ${matchedWords.length}個 (${matchedWords.join(', ')}) → +${matchedWords.length * 20}点`);
+        }
+
+        // 完全なキーワードマッチングも試す（従来の方式）
         if (searchText && recipe.title.toLowerCase().includes(searchText)) {
-            score += 20;
+            score += 10; // ボーナス点
+            console.log(`🎯 完全マッチ: "${searchText}" → +10点`);
         }
 
         // 材料マッチング: +10点×個数
@@ -179,22 +215,29 @@ function searchRecipes(parameters) {
             );
             if (matchedIngredients.length > 0) {
                 score += matchedIngredients.length * 10;
+                console.log(`🥬 材料マッチ: ${matchedIngredients.length}個 → +${matchedIngredients.length * 10}点`);
             }
         }
 
-        // メイン材料マッチング: +15点
-        if (searchText) {
-            const mainMatches = recipe.main_ingredients.filter(main => 
-                main.toLowerCase().includes(searchText)
-            );
-            if (mainMatches.length > 0) {
-                score += 15 * mainMatches.length;
+        // メイン材料マッチング: 各単語について+15点
+        if (searchWords.length > 0) {
+            let mainScore = 0;
+            searchWords.forEach(word => {
+                const mainMatches = recipe.main_ingredients.filter(main => 
+                    main.toLowerCase().includes(word)
+                );
+                mainScore += mainMatches.length * 15;
+            });
+            score += mainScore;
+            if (mainScore > 0) {
+                console.log(`🍆 メイン材料マッチ: +${mainScore}点`);
             }
         }
 
         // カテゴリマッチング: +10点
         if (category && recipe.categories.includes(category)) {
             score += 10;
+            console.log(`📂 カテゴリマッチ: "${category}" → +10点`);
         }
 
         return { ...recipe, score };
@@ -203,6 +246,11 @@ function searchRecipes(parameters) {
     const sortedResults = results
         .filter(recipe => recipe.score > 0)
         .sort((a, b) => b.score - a.score);
+    
+    console.log(`📈 検索結果: ${sortedResults.length}件`);
+    sortedResults.forEach((recipe, index) => {
+        console.log(`${index + 1}. "${recipe.title}" (スコア: ${recipe.score})`);
+    });
 
     return {
         success: true,
