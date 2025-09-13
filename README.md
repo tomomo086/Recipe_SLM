@@ -16,6 +16,43 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせ、**Func
 
 > ⚠️ **注意**: これはポートフォリオ・学習目的の作品です。個人利用を想定しており、商用利用は想定しておりません。
 
+## 🎬 デモ動画
+
+> **実際の動作を見てみましょう！** スマートフォンでの操作感やAIとの対話の様子をご覧いただけます。
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://youtube.com/shorts/wMjhj4rWVgQ?feature=share">
+          <img src="https://img.youtube.com/vi/wMjhj4rWVgQ/maxresdefault.jpg" alt="YouTube デモ動画 前半" width="280"/>
+          <br>
+          <strong>📺 前半: 基本操作デモ</strong>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://youtube.com/shorts/dFtQVlaKm0M?feature=share">
+          <img src="https://img.youtube.com/vi/dFtQVlaKm0M/maxresdefault.jpg" alt="YouTube デモ動画 後半" width="280"/>
+          <br>
+          <strong>📺 後半: 詳細機能デモ</strong>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+**🔥 動画で確認できるポイント:**
+- ✨ リアルタイム文字ストリーミング応答
+- 📱 スマートフォン専用最適化UI
+- 🔧 Function Calling実行状況の可視化
+- 🔍 具体的なレシピ検索・詳細表示機能
+- 🤖 専門的な料理アドバイスと詳細レシピ
+- 🎨 グラデーションデザインと滑らかなアニメーション
+
+> 📺 **YouTubeで視聴**: 
+> - 前半: [https://youtube.com/shorts/wMjhj4rWVgQ?feature=share](https://youtube.com/shorts/wMjhj4rWVgQ?feature=share)
+> - 後半: [https://youtube.com/shorts/dFtQVlaKm0M?feature=share](https://youtube.com/shorts/dFtQVlaKm0M?feature=share)
+
 ## 📸 プロジェクトレジュメ
 
 ### 🌟 主要セールスポイント
@@ -54,43 +91,6 @@ LM StudioとローカルSLM（Small Language Model）を組み合わせ、**Func
 - **📱 スマートフォン最適化**: タッチ操作・スワイプ機能・レスポンシブデザイン
 - **🏠 PWA対応**: ホーム画面追加・オフライン動作・ネイティブアプリ体験
 - **📚 豊富なレシピデータ**: 30件の詳細レシピデータベース内蔵
-
-## 🎬 デモ動画
-
-> **実際の動作を見てみましょう！** スマートフォンでの操作感やAIとの対話の様子をご覧いただけます。
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://youtube.com/shorts/wMjhj4rWVgQ?feature=share">
-          <img src="https://img.youtube.com/vi/wMjhj4rWVgQ/maxresdefault.jpg" alt="YouTube デモ動画 前半" width="280"/>
-          <br>
-          <strong>📺 前半: 基本操作デモ</strong>
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://youtube.com/shorts/dFtQVlaKm0M?feature=share">
-          <img src="https://img.youtube.com/vi/dFtQVlaKm0M/maxresdefault.jpg" alt="YouTube デモ動画 後半" width="280"/>
-          <br>
-          <strong>📺 後半: 詳細機能デモ</strong>
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-**🔥 動画で確認できるポイント:**
-- ✨ リアルタイム文字ストリーミング応答
-- 📱 スマートフォン専用最適化UI
-- 🔧 Function Calling実行状況の可視化
-- 🔍 具体的なレシピ検索・詳細表示機能
-- 🤖 専門的な料理アドバイスと詳細レシピ
-- 🎨 グラデーションデザインと滑らかなアニメーション
-
-> 📺 **YouTubeで視聴**: 
-> - 前半: [https://youtube.com/shorts/wMjhj4rWVgQ?feature=share](https://youtube.com/shorts/wMjhj4rWVgQ?feature=share)
-> - 後半: [https://youtube.com/shorts/dFtQVlaKm0M?feature=share](https://youtube.com/shorts/dFtQVlaKm0M?feature=share)
 
 ## 📱 アプリケーション画面（スマホでの表示例）
 
