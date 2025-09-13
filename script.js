@@ -236,12 +236,15 @@ function getUserFavorites(parameters) {
 
 // ツール実行状況を表示する関数
 function addFunctionCallingStatus(functionCalls) {
+    console.log('🏗️ addFunctionCallingStatus開始:', functionCalls);
     const statusDiv = document.createElement('div');
     statusDiv.className = 'function-calling-status';
+    console.log('📦 statusDiv作成完了:', statusDiv);
     
     const header = document.createElement('div');
     header.innerHTML = `🔧 <strong>Function Calling実行中...</strong> (${functionCalls.length}個の関数)`;
     statusDiv.appendChild(header);
+    console.log('📋 header追加完了');
     
     functionCalls.forEach((call, index) => {
         const callItem = document.createElement('div');
@@ -259,33 +262,42 @@ function addFunctionCallingStatus(functionCalls) {
         `;
         
         statusDiv.appendChild(callItem);
+        console.log(`⚙️ callItem ${index + 1} 追加完了:`, call.function.name);
     });
     
-    document.getElementById('messages').appendChild(statusDiv);
-    document.getElementById('messages').scrollTop = 999999;
+    const messagesDiv = document.getElementById('messages');
+    console.log('📱 messagesDiv取得:', messagesDiv ? 'あり' : 'なし');
+    messagesDiv.appendChild(statusDiv);
+    messagesDiv.scrollTop = 999999;
+    console.log('✅ statusDiv DOM追加完了');
     return statusDiv;
 }
 
 // ツール実行結果を表示する関数
 function updateFunctionCallingStatus(statusDiv, results) {
+    console.log('🔄 updateFunctionCallingStatus開始:', statusDiv, results);
     const resultSummary = document.createElement('div');
     resultSummary.className = 'function-result-summary';
+    console.log('📦 resultSummary作成完了');
     
     const totalResults = results.reduce((sum, result) => {
         const parsed = JSON.parse(result.content);
+        console.log('📊 parsed result:', parsed);
         return sum + (parsed.count || 0);
     }, 0);
     
+    console.log('🔢 totalResults:', totalResults);
     resultSummary.innerHTML = `✅ <strong>実行完了</strong> - ${totalResults}件のレシピデータを取得`;
     statusDiv.appendChild(resultSummary);
+    console.log('✅ resultSummary DOM追加完了');
 }
 
-function addMessage(text, isUser) {
+function addMessage(text, isUser, useTypingEffect = false) {
     const div = document.createElement('div');
     div.className = 'message ' + (isUser ? 'user' : 'ai');
     
     // デバッグ用ログ
-    console.log('addMessage called:', { text: text.substring(0, 50), isUser });
+    console.log('addMessage called:', { text: text.substring(0, 50), isUser, useTypingEffect });
     
     // AIメッセージに詳細表示ボタンを追加（ウェルカムメッセージ以外）
     if (!isUser) {
@@ -302,7 +314,6 @@ function addMessage(text, isUser) {
             // メッセージテキスト部分
             const messageText = document.createElement('div');
             messageText.className = 'message-text';
-            messageText.textContent = text;
             
             // 詳細表示ボタン
             const detailButton = document.createElement('button');
@@ -321,6 +332,20 @@ function addMessage(text, isUser) {
             messageContainer.appendChild(messageText);
             messageContainer.appendChild(detailButton);
             div.appendChild(messageContainer);
+            
+            // DOMに追加してからタイピング効果を開始
+            document.getElementById('messages').appendChild(div);
+            document.getElementById('messages').scrollTop = 999999;
+            
+            // タイピング効果を適用
+            if (useTypingEffect) {
+                console.log('🎬 タイピング効果開始:', text.substring(0, 30));
+                typewriteText(messageText, text);
+            } else {
+                messageText.textContent = text;
+            }
+            
+            return; // 早期リターンで重複追加を防ぐ
         } else {
             // ウェルカムメッセージは従来通り
             div.textContent = text;
@@ -397,17 +422,25 @@ async function sendMessage() {
         }
 
         const data = await response.json();
+        console.log('📨 LM Studio応答データ:', data);
+        console.log('📨 message:', data.choices[0].message);
+        console.log('📨 tool_calls存在チェック:', data.choices[0].message.tool_calls);
         
         // Function Calling処理
+        console.log('🔍 Function Calling条件チェック開始...');
         if (data.choices[0].message.tool_calls && data.choices[0].message.tool_calls.length > 0) {
-            console.log('🔧 Function Calling検出:', data.choices[0].message.tool_calls.length, '個');
+            console.log('✅ Function Calling検出:', data.choices[0].message.tool_calls.length, '個');
             console.log('Tool calls:', data.choices[0].message.tool_calls);
             
             // リアルタイム表示を追加
+            console.log('🗑️ aiMessageDiv削除実行...');
             aiMessageDiv.remove();
             console.log('🎯 リアルタイム表示開始...');
+            console.log('📋 addFunctionCallingStatus関数チェック:', typeof addFunctionCallingStatus);
             const statusDiv = addFunctionCallingStatus(data.choices[0].message.tool_calls);
             console.log('📺 ステータス表示作成完了:', statusDiv);
+            console.log('📺 ステータス表示要素の親:', statusDiv ? statusDiv.parentNode : 'なし');
+            console.log('📺 ステータス表示の内容:', statusDiv ? statusDiv.innerHTML : 'なし');
             
             const toolResults = [];
             
@@ -455,21 +488,29 @@ async function sendMessage() {
             
             // 実行完了表示
             setTimeout(() => {
+                console.log('⏰ updateFunctionCallingStatus実行開始...');
+                console.log('📊 toolResults:', toolResults);
                 const mockResults = toolResults.map(result => ({
                     content: result.content
                 }));
+                console.log('🎭 mockResults:', mockResults);
+                console.log('📋 updateFunctionCallingStatus関数チェック:', typeof updateFunctionCallingStatus);
+                console.log('📋 statusDiv存在チェック:', statusDiv ? 'あり' : 'なし');
                 updateFunctionCallingStatus(statusDiv, mockResults);
+                console.log('✅ updateFunctionCallingStatus実行完了');
             }, 500);
             
-            // 最終応答を表示
+            // 最終応答を表示（タイピング効果付き）
             setTimeout(() => {
-                addMessage(finalData.choices[0].message.content, false);
+                console.log('🎬 最終応答をタイピング効果で表示開始');
+                addMessage(finalData.choices[0].message.content, false, true);
             }, 1000);
             
         } else {
-            // 通常の応答
+            // 通常の応答（タイピング効果付き）
+            console.log('💬 通常の応答モード (Function Calling無し)');
             aiMessageDiv.remove();
-            addMessage(data.choices[0].message.content, false);
+            addMessage(data.choices[0].message.content, false, true);
         }
 
         showStatus('✓ 応答完了');
@@ -572,6 +613,26 @@ function optimizeForMobile() {
                 }
             }
         }
+    });
+}
+
+// AIメッセージのタイピング効果
+function typewriteText(element, text, speed = 30) {
+    return new Promise((resolve) => {
+        let index = 0;
+        element.textContent = '';
+        
+        function typeNextChar() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeNextChar, speed);
+            } else {
+                resolve();
+            }
+        }
+        
+        typeNextChar();
     });
 }
 
