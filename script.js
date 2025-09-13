@@ -4,6 +4,282 @@ const API_CONFIG = {
     model: 'local-model' // デフォルトモデル名
 };
 
+// レシピデータ（ローカル）
+const RECIPE_DATA = [
+    {
+        "id": "recipe_001",
+        "title": "豚のしょうが焼き",
+        "cooking_time": 15,
+        "ingredients": [
+            "豚ロース薄切り肉 300g",
+            "生姜 1片",
+            "醤油 大さじ2",
+            "みりん 大さじ2",
+            "酒 大さじ1",
+            "砂糖 小さじ1",
+            "サラダ油 大さじ1",
+            "玉ねぎ 1/2個"
+        ],
+        "steps": [
+            "生姜をすりおろし、調味料と混ぜてタレを作る",
+            "豚肉を一口大に切り、タレに10分漬け込む",
+            "玉ねぎを薄切りにする",
+            "フライパンに油を熱し、豚肉を焼く",
+            "豚肉に火が通ったら玉ねぎを加えて炒める",
+            "タレを加えて絡めて完成"
+        ],
+        "main_ingredients": ["豚肉", "生姜"],
+        "categories": ["teiban"]
+    },
+    {
+        "id": "recipe_002",
+        "title": "なすの照り焼き",
+        "cooking_time": 20,
+        "ingredients": [
+            "なす 3本",
+            "醤油 大さじ3",
+            "みりん 大さじ3",
+            "砂糖 大さじ1",
+            "サラダ油 大さじ2",
+            "白ごま 小さじ1"
+        ],
+        "steps": [
+            "なすを乱切りにして水にさらす",
+            "醤油、みりん、砂糖を混ぜてタレを作る",
+            "フライパンに多めの油を熱する",
+            "なすを入れて中火で焼く",
+            "なすがしんなりしたらタレを加える",
+            "タレが絡んだら白ごまをふって完成"
+        ],
+        "main_ingredients": ["なす"],
+        "categories": ["yasai", "teiban"]
+    },
+    {
+        "id": "recipe_003",
+        "title": "鶏の唐揚げ",
+        "cooking_time": 25,
+        "ingredients": [
+            "鶏もも肉 400g",
+            "醤油 大さじ2",
+            "酒 大さじ1",
+            "にんにく 1片",
+            "生姜 1片",
+            "片栗粉 大さじ4",
+            "薄力粉 大さじ2",
+            "揚げ油 適量"
+        ],
+        "steps": [
+            "鶏肉を一口大に切る",
+            "にんにく、生姜をすりおろす",
+            "鶏肉に醤油、酒、にんにく、生姜を揉み込み30分漬ける",
+            "片栗粉と薄力粉を混ぜて鶏肉にまぶす",
+            "170度の油で3-4分揚げる",
+            "一度取り出し、180度で1分再度揚げて完成"
+        ],
+        "main_ingredients": ["鶏肉"],
+        "categories": ["teiban", "fried"]
+    }
+];
+
+// Function Tools定義
+const FUNCTION_TOOLS = [
+    {
+        type: "function",
+        function: {
+            name: "search_recipes",
+            description: "材料やキーワードでレシピを検索します",
+            parameters: {
+                type: "object",
+                properties: {
+                    keyword: {
+                        type: "string",
+                        description: "検索するキーワード（料理名、材料名など）"
+                    },
+                    ingredients: {
+                        type: "array",
+                        items: {
+                            type: "string"
+                        },
+                        description: "使いたい材料のリスト"
+                    },
+                    category: {
+                        type: "string",
+                        description: "料理カテゴリ（teiban, yasai, friedなど）"
+                    }
+                },
+                required: []
+            }
+        }
+    },
+    {
+        type: "function",
+        function: {
+            name: "get_recipe_detail",
+            description: "レシピIDから詳細なレシピ情報を取得します",
+            parameters: {
+                type: "object",
+                properties: {
+                    recipe_id: {
+                        type: "string",
+                        description: "レシピのID（例: recipe_001）"
+                    }
+                },
+                required: ["recipe_id"]
+            }
+        }
+    },
+    {
+        type: "function",
+        function: {
+            name: "get_user_favorites",
+            description: "ユーザーのお気に入りレシピ（いつものレシピ）を取得します",
+            parameters: {
+                type: "object",
+                properties: {},
+                required: []
+            }
+        }
+    }
+];
+
+// ローカルFunction実行
+function executeLocalFunction(functionName, parameters) {
+    console.log(`⚙️ ローカル関数「${functionName}」実行中...`, parameters);
+    
+    switch (functionName) {
+        case 'search_recipes':
+            return searchRecipes(parameters);
+        case 'get_recipe_detail':
+            return getRecipeDetail(parameters);
+        case 'get_user_favorites':
+            return getUserFavorites(parameters);
+        default:
+            return { error: true, message: `未知の関数: ${functionName}` };
+    }
+}
+
+function searchRecipes(parameters) {
+    const { keyword = '', ingredients = [], category = null } = parameters;
+    
+    const results = RECIPE_DATA.map(recipe => {
+        let score = 0;
+        const searchText = keyword ? keyword.toLowerCase() : '';
+
+        // 料理名マッチング: +20点
+        if (searchText && recipe.title.toLowerCase().includes(searchText)) {
+            score += 20;
+        }
+
+        // 材料マッチング: +10点×個数
+        if (ingredients.length > 0) {
+            const matchedIngredients = ingredients.filter(ing => 
+                recipe.ingredients.some(recipeIng => 
+                    recipeIng.toLowerCase().includes(ing.toLowerCase())
+                )
+            );
+            if (matchedIngredients.length > 0) {
+                score += matchedIngredients.length * 10;
+            }
+        }
+
+        // メイン材料マッチング: +15点
+        if (searchText) {
+            const mainMatches = recipe.main_ingredients.filter(main => 
+                main.toLowerCase().includes(searchText)
+            );
+            if (mainMatches.length > 0) {
+                score += 15 * mainMatches.length;
+            }
+        }
+
+        // カテゴリマッチング: +10点
+        if (category && recipe.categories.includes(category)) {
+            score += 10;
+        }
+
+        return { ...recipe, score };
+    });
+
+    const sortedResults = results
+        .filter(recipe => recipe.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+    return {
+        success: true,
+        count: sortedResults.length,
+        recipes: sortedResults.slice(0, 10)
+    };
+}
+
+function getRecipeDetail(parameters) {
+    const { recipe_id } = parameters;
+    const recipe = RECIPE_DATA.find(r => r.id === recipe_id);
+    
+    if (recipe) {
+        return { success: true, recipe: recipe };
+    } else {
+        return { success: false, message: `レシピID "${recipe_id}" が見つかりません` };
+    }
+}
+
+function getUserFavorites(parameters) {
+    const favorites = RECIPE_DATA.filter(recipe => 
+        recipe.categories.includes('teiban')
+    );
+    
+    return {
+        success: true,
+        count: favorites.length,
+        recipes: favorites
+    };
+}
+
+// ツール実行状況を表示する関数
+function addFunctionCallingStatus(functionCalls) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'function-calling-status';
+    
+    const header = document.createElement('div');
+    header.innerHTML = `🔧 <strong>Function Calling実行中...</strong> (${functionCalls.length}個の関数)`;
+    statusDiv.appendChild(header);
+    
+    functionCalls.forEach((call, index) => {
+        const callItem = document.createElement('div');
+        callItem.className = 'function-call-item';
+        
+        const params = JSON.parse(call.function.arguments);
+        const paramStr = Object.keys(params).map(key => 
+            `${key}: "${params[key]}"`
+        ).join(', ');
+        
+        callItem.innerHTML = `
+            <span class="icon">⚙️</span>
+            <span class="function-name">${call.function.name}</span>
+            <span class="function-params">(${paramStr})</span>
+        `;
+        
+        statusDiv.appendChild(callItem);
+    });
+    
+    document.getElementById('messages').appendChild(statusDiv);
+    document.getElementById('messages').scrollTop = 999999;
+    return statusDiv;
+}
+
+// ツール実行結果を表示する関数
+function updateFunctionCallingStatus(statusDiv, results) {
+    const resultSummary = document.createElement('div');
+    resultSummary.className = 'function-result-summary';
+    
+    const totalResults = results.reduce((sum, result) => {
+        const parsed = JSON.parse(result.content);
+        return sum + (parsed.count || 0);
+    }, 0);
+    
+    resultSummary.innerHTML = `✅ <strong>実行完了</strong> - ${totalResults}件のレシピデータを取得`;
+    statusDiv.appendChild(resultSummary);
+}
+
 function addMessage(text, isUser) {
     const div = document.createElement('div');
     div.className = 'message ' + (isUser ? 'user' : 'ai');
@@ -94,12 +370,25 @@ async function sendMessage() {
                 model: API_CONFIG.model,
                 messages: [
                     {
+                        role: "system",
+                        content: `あなたは「ポケット献立アシスタント」です。料理に関する質問に親しみやすく答える専門アシスタントです。
+
+利用可能な関数:
+- search_recipes: 材料やキーワードでレシピを検索
+- get_recipe_detail: レシピIDから詳細情報を取得
+- get_user_favorites: お気に入り（定番）レシピを取得
+
+ユーザーが料理や材料について質問したら、必ず適切な関数を実行してください。`
+                    },
+                    {
                         role: "user",
                         content: message
                     }
                 ],
+                tools: FUNCTION_TOOLS,
+                tool_choice: "auto",
                 temperature: 0.7,
-                stream: true  // ストリーミングを有効化
+                stream: false
             })
         });
 
@@ -107,51 +396,80 @@ async function sendMessage() {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        // ストリーミング応答を処理
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-
-        try {
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const data = line.slice(6);
-                        if (data === '[DONE]') {
-                            showStatus('✓ 応答完了');
-                            break; // returnではなくbreakを使用
-                        }
-
-                        try {
-                            const parsed = JSON.parse(data);
-                            if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content) {
-                                const content = parsed.choices[0].delta.content;
-                                aiMessageDiv.textContent += content;
-                                document.getElementById('messages').scrollTop = 999999;
-                            }
-                        } catch (e) {
-                            // JSONパースエラーは無視
-                        }
-                    }
-                }
-            }
-        } finally {
-            reader.releaseLock();
-        }
-
-        // ストリーミング完了後に詳細表示ボタンを追加
-        const finalText = aiMessageDiv.textContent;
-        if (finalText && finalText.trim().length > 0) {
-            // 既存のメッセージを削除して、ボタン付きで再作成
+        const data = await response.json();
+        
+        // Function Calling処理
+        if (data.choices[0].message.tool_calls && data.choices[0].message.tool_calls.length > 0) {
+            console.log('🔧 Function Calling検出:', data.choices[0].message.tool_calls.length, '個');
+            console.log('Tool calls:', data.choices[0].message.tool_calls);
+            
+            // リアルタイム表示を追加
             aiMessageDiv.remove();
-            addMessage(finalText, false);
+            console.log('🎯 リアルタイム表示開始...');
+            const statusDiv = addFunctionCallingStatus(data.choices[0].message.tool_calls);
+            console.log('📺 ステータス表示作成完了:', statusDiv);
+            
+            const toolResults = [];
+            
+            // ローカルでFunction実行
+            for (const toolCall of data.choices[0].message.tool_calls) {
+                const functionName = toolCall.function.name;
+                const parameters = JSON.parse(toolCall.function.arguments);
+                
+                console.log(`⚙️ 関数「${functionName}」実行中...`, parameters);
+                
+                const result = executeLocalFunction(functionName, parameters);
+                toolResults.push({
+                    tool_call_id: toolCall.id,
+                    role: "tool",
+                    content: JSON.stringify(result, null, 2)
+                });
+            }
+            
+            // 関数実行結果を含めて最終応答を取得
+            const finalResponse = await fetch(API_CONFIG.url + '/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: API_CONFIG.model,
+                    messages: [
+                        {
+                            role: "system",
+                            content: `あなたは「ポケット献立アシスタント」です。料理に関する質問に親しみやすく答える専門アシスタントです。関数実行結果を基に、詳しく親しみやすい説明を提供してください。`
+                        },
+                        {
+                            role: "user",
+                            content: message
+                        },
+                        data.choices[0].message,
+                        ...toolResults
+                    ],
+                    temperature: 0.7,
+                    stream: false
+                })
+            });
+            
+            const finalData = await finalResponse.json();
+            
+            // 実行完了表示
+            setTimeout(() => {
+                const mockResults = toolResults.map(result => ({
+                    content: result.content
+                }));
+                updateFunctionCallingStatus(statusDiv, mockResults);
+            }, 500);
+            
+            // 最終応答を表示
+            setTimeout(() => {
+                addMessage(finalData.choices[0].message.content, false);
+            }, 1000);
+            
+        } else {
+            // 通常の応答
+            aiMessageDiv.remove();
+            addMessage(data.choices[0].message.content, false);
         }
 
         showStatus('✓ 応答完了');
