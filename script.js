@@ -498,13 +498,13 @@ async function sendMessage() {
                 console.log('📋 statusDiv存在チェック:', statusDiv ? 'あり' : 'なし');
                 updateFunctionCallingStatus(statusDiv, mockResults);
                 console.log('✅ updateFunctionCallingStatus実行完了');
-            }, 500);
+            }, 200);
             
             // 最終応答を表示（タイピング効果付き）
             setTimeout(() => {
                 console.log('🎬 最終応答をタイピング効果で表示開始');
                 addMessage(finalData.choices[0].message.content, false, true);
-            }, 1000);
+            }, 300);
             
         } else {
             // 通常の応答（タイピング効果付き）
@@ -617,7 +617,7 @@ function optimizeForMobile() {
 }
 
 // AIメッセージのタイピング効果
-function typewriteText(element, text, speed = 30) {
+function typewriteText(element, text, speed = 15) {
     return new Promise((resolve) => {
         let index = 0;
         element.textContent = '';
