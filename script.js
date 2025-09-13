@@ -29,76 +29,140 @@ const API_CONFIG = {
 const RECIPE_DATA = [
     {
         "id": "recipe_001",
-        "title": "豚のしょうが焼き",
-        "cooking_time": 15,
+        "title": "しょうが焼き",
+        "aliases": ["生姜焼き", "豚の生姜焼き", "豚のしょうが焼き", "ジンジャーポーク"],
+        "cooking_time": "10分",
         "ingredients": [
-            "豚ロース薄切り肉 300g",
-            "生姜 1片",
-            "醤油 大さじ2",
-            "みりん 大さじ2",
-            "酒 大さじ1",
+            "豚ロース 300g",
+            "生姜チューブ 4cm", 
             "砂糖 小さじ1",
-            "サラダ油 大さじ1",
-            "玉ねぎ 1/2個"
+            "酒 大さじ1",
+            "醤油 大さじ2",
+            "みりん 大さじ2"
         ],
         "steps": [
-            "生姜をすりおろし、調味料と混ぜてタレを作る",
-            "豚肉を一口大に切り、タレに10分漬け込む",
-            "玉ねぎを薄切りにする",
-            "フライパンに油を熱し、豚肉を焼く",
-            "豚肉に火が通ったら玉ねぎを加えて炒める",
-            "タレを加えて絡めて完成"
+            "肉を焼く",
+            "混ぜたタレを加え、強火で煮詰める"
         ],
-        "main_ingredients": ["豚肉", "生姜"],
-        "categories": ["teiban"]
+        "main_ingredients": ["豚肉", "豚ロース"],
+        "categories": ["teiban", "meat"],
+        "features": ["10分", "2ステップ", "失敗しない"],
+        "tips": "終始強火。タレは事前混合。ほぼ無くなるまで煮詰める。",
+        "substitutions": "豚こまOK。柔らかくしたいなら小麦粉をまぶし弱火で。"
     },
     {
         "id": "recipe_002",
-        "title": "なすの照り焼き",
-        "cooking_time": 20,
+        "title": "なすと豚肉のトロトロ照り焼き",
+        "aliases": ["なすの照り焼き", "茄子の照り焼き", "なす照り焼き", "なすと豚の炒め物"],
+        "cooking_time": "15分",
         "ingredients": [
             "なす 3本",
-            "醤油 大さじ3",
-            "みりん 大さじ3",
+            "ピーマン 2個",
+            "豚こま 150g",
+            "片栗粉 適量",
+            "油 大さじ1",
+            "酒 大さじ2",
+            "みりん 大さじ1",
             "砂糖 大さじ1",
-            "サラダ油 大さじ2",
-            "白ごま 小さじ1"
+            "しょうゆ 大さじ1"
         ],
         "steps": [
-            "なすを乱切りにして水にさらす",
-            "醤油、みりん、砂糖を混ぜてタレを作る",
-            "フライパンに多めの油を熱する",
-            "なすを入れて中火で焼く",
-            "なすがしんなりしたらタレを加える",
-            "タレが絡んだら白ごまをふって完成"
+            "なすに片栗粉をまぶす",
+            "豚肉→なすの順で炒める",
+            "ピーマンを加え、タレを絡める"
         ],
-        "main_ingredients": ["なす"],
-        "categories": ["yasai", "teiban"]
+        "main_ingredients": ["なす", "ピーマン", "豚肉"],
+        "categories": ["yasai", "teiban"],
+        "features": ["15分", "黄金トリオ", "トロトロ食感"],
+        "tips": "なすの片栗粉がトロトロの秘訣。ピーマンは最後に入れる。",
+        "substitutions": "豚バラ, 牛肉, 鶏肉OK。ピーマンの代わりにパプリカ, 玉ねぎも可。"
     },
     {
         "id": "recipe_003",
-        "title": "鶏の唐揚げ",
-        "cooking_time": 25,
+        "title": "パン粉なしハンバーグ",
+        "aliases": ["ハンバーグ", "片栗粉ハンバーグ", "ふんわりハンバーグ"],
+        "cooking_time": "40分",
         "ingredients": [
-            "鶏もも肉 400g",
-            "醤油 大さじ2",
-            "酒 大さじ1",
-            "にんにく 1片",
-            "生姜 1片",
-            "片栗粉 大さじ4",
-            "薄力粉 大さじ2",
-            "揚げ油 適量"
+            "合びき肉 250g",
+            "玉ねぎ 50g",
+            "卵 1個",
+            "塩 小さじ1/4",
+            "片栗粉 大さじ2",
+            "牛乳 大さじ1",
+            "こしょう 少々",
+            "ポン酢 大さじ3",
+            "水 大さじ1",
+            "砂糖 小さじ1"
         ],
         "steps": [
-            "鶏肉を一口大に切る",
-            "にんにく、生姜をすりおろす",
-            "鶏肉に醤油、酒、にんにく、生姜を揉み込み30分漬ける",
-            "片栗粉と薄力粉を混ぜて鶏肉にまぶす",
-            "170度の油で3-4分揚げる",
-            "一度取り出し、180度で1分再度揚げて完成"
+            "肉と塩を粘りが出るまで捏ねる",
+            "残りの材料を加え成形し、両面に焼き色をつける",
+            "蓋をして弱火で8分蒸し焼き",
+            "ソースを煮詰めてかける"
         ],
-        "main_ingredients": ["鶏肉"],
-        "categories": ["teiban", "fried"]
+        "main_ingredients": ["合いびき肉", "ひき肉"],
+        "categories": ["teiban", "meat"],
+        "features": ["40分", "片栗粉でふんわり", "肉汁キープ"],
+        "tips": "肉と塩を最初にしっかり捏ねる。透明な肉汁が焼き上がりのサイン。",
+        "substitutions": "チーズイン可。ソースはデミグラス等でも。"
+    },
+    {
+        "id": "recipe_004",
+        "title": "鯖缶とトマトのスパイスカレー",
+        "aliases": ["鯖缶カレー", "サバ缶カレー", "スパイスカレー", "無水カレー"],
+        "cooking_time": "10分",
+        "ingredients": [
+            "オリーブ油 20g",
+            "ニンニク 5g",
+            "ショウガ 5g",
+            "玉ねぎ 60g",
+            "塩 3g",
+            "スパイスパウダー 4g",
+            "カレー粉 2g",
+            "トマト 1個(240g)",
+            "鯖水煮缶 1缶(汁ごと)"
+        ],
+        "steps": [
+            "材料を鍋に上から順に入れる",
+            "蓋をして弱火で10分煮込む"
+        ],
+        "main_ingredients": ["鯖缶", "トマト", "カレー粉"],
+        "categories": ["curry", "healthy"],
+        "features": ["煮込み10分", "無水調理", "材料を入れるだけ"],
+        "tips": "材料の順番を守る。終始弱火。混ぜない。",
+        "substitutions": "鯖缶→ツナ缶, いわし缶OK。トマト→カットトマト缶OK。辛味は唐辛子で。"
+    },
+    {
+        "id": "recipe_005",
+        "title": "韓国風 甘辛豚丼",
+        "aliases": ["豚丼", "韓国風豚丼", "コチュジャン豚丼", "甘辛豚丼"],
+        "cooking_time": "15分",
+        "ingredients": [
+            "豚バラ肉 200g",
+            "玉ねぎ 中1個",
+            "ごはん 適量",
+            "しょうゆ 大さじ1と1/2",
+            "砂糖 大さじ1",
+            "酒 大さじ1",
+            "みりん 大さじ1",
+            "コチュジャン 小さじ1",
+            "ごま油 小さじ1",
+            "おろしにんにく 適量",
+            "おろししょうが 適量",
+            "白ごま 適量",
+            "温泉卵 適量"
+        ],
+        "steps": [
+            "タレを混ぜる",
+            "玉ねぎと豚肉を炒める",
+            "タレを加えて強火で煮絡める",
+            "ごはんに乗せてトッピング"
+        ],
+        "main_ingredients": ["豚丼", "豚バラ", "韓国風"],
+        "categories": ["korean", "meat", "rice"],
+        "features": ["コチュジャンとごま油で食欲増進", "甘辛味"],
+        "tips": "コチュジャンの量で辛さを調節（レシピは甘口）。",
+        "substitutions": "豚バラの代わりに他の部位の豚肉でも可。"
     }
 ];
 
@@ -206,6 +270,19 @@ function searchRecipes(parameters) {
             console.log(`🎯 完全マッチ: "${searchText}" → +10点`);
         }
 
+        // エイリアス（別名）マッチング: +25点×個数
+        if (searchWords.length > 0 && recipe.aliases) {
+            searchWords.forEach(word => {
+                const aliasMatches = recipe.aliases.filter(alias => 
+                    alias.toLowerCase().includes(word)
+                );
+                if (aliasMatches.length > 0) {
+                    score += aliasMatches.length * 25;
+                    console.log(`🏷️ エイリアスマッチ: ${aliasMatches.length}個 (${aliasMatches.join(', ')}) → +${aliasMatches.length * 25}点`);
+                }
+            });
+        }
+
         // 材料マッチング: +10点×個数
         if (ingredients.length > 0) {
             const matchedIngredients = ingredients.filter(ing => 
@@ -217,6 +294,19 @@ function searchRecipes(parameters) {
                 score += matchedIngredients.length * 10;
                 console.log(`🥬 材料マッチ: ${matchedIngredients.length}個 → +${matchedIngredients.length * 10}点`);
             }
+        }
+
+        // 特徴マッチング: +5点×個数
+        if (searchWords.length > 0 && recipe.features) {
+            searchWords.forEach(word => {
+                const featureMatches = recipe.features.filter(feature => 
+                    feature.toLowerCase().includes(word)
+                );
+                if (featureMatches.length > 0) {
+                    score += featureMatches.length * 5;
+                    console.log(`✨ 特徴マッチ: ${featureMatches.length}個 → +${featureMatches.length * 5}点`);
+                }
+            });
         }
 
         // メイン材料マッチング: 各単語について+15点
@@ -448,10 +538,16 @@ async function sendMessage() {
 
 利用可能な関数:
 - search_recipes: 材料やキーワードでレシピを検索
-- get_recipe_detail: レシピIDから詳細情報を取得
+- get_recipe_detail: レシピIDから詳細情報を取得  
 - get_user_favorites: お気に入り（定番）レシピを取得
 
-ユーザーが料理や材料について質問したら、必ず適切な関数を実行してください。`
+【重要】ユーザーが以下のような質問をした場合は、必ずsearch_recipes関数を実行してください：
+- 「○○の作り方教えて」「○○のレシピ教えて」
+- 「○○を使った料理教えて」「○○の料理ある？」
+- 「○○料理教えて」「○○のメニュー教えて」
+- 材料名や料理名が含まれる質問全般
+
+例: 「なすを使った料理教えて」→ search_recipes(keyword: "なす")`
                     },
                     {
                         role: "user",
@@ -517,8 +613,10 @@ async function sendMessage() {
                     model: API_CONFIG.model,
                     messages: [
                         {
-                            role: "system",
-                            content: `あなたは「ポケット献立アシスタント」です。料理に関する質問に親しみやすく答える専門アシスタントです。関数実行結果を基に、詳しく親しみやすい説明を提供してください。`
+                            role: "system", 
+                            content: `あなたは「ポケット献立アシスタント」です。料理に関する質問に親しみやすく答える専門アシスタントです。
+
+関数実行結果を基に、詳しく親しみやすい説明を提供してください。レシピの特徴、調理のコツ、材料の代替案なども含めて説明すると喜ばれます。`
                         },
                         {
                             role: "user",
