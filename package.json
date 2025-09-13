@@ -1,0 +1,27 @@
+{
+  "name": "recipe-slm-function-calling",
+  "version": "1.0.0",
+  "description": "Recipe SLM with Function Calling implementation",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "node test/test-functions.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "recipe",
+    "slm",
+    "function-calling",
+    "ai",
+    "lm-studio"
+  ],
+  "author": "tomomo086",
+  "license": "MIT"
+}
